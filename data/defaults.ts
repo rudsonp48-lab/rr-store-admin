@@ -4592,11 +4592,39 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
   },
 ];
 
-export const PRODUCTS: Product[] = rawProducts.map((p) => ({
-  ...p,
-  precoPix: calculatePixPrice(p.precoPor),
-  parcelamento: formatInstallment(p.precoPor, p.maxParcelasSemJuros),
-}));
+export function applySupplierMarkup(cost: number): { precoPor: number; precoDe: number } {
+  let targetPrice: number;
+  if (cost <= 15) {
+    targetPrice = Math.max(cost * 1.45, cost + 5);
+  } else if (cost <= 50) {
+    targetPrice = cost * 1.38;
+  } else if (cost <= 150) {
+    targetPrice = cost * 1.32;
+  } else {
+    targetPrice = cost * 1.25;
+  }
+
+  const precoPor = Number((Math.floor(targetPrice) + 0.9).toFixed(2));
+  const precoDe = Number((Math.floor(precoPor * 1.28) + 0.9).toFixed(2));
+  return { precoPor, precoDe };
+}
+
+export const PRODUCTS: Product[] = rawProducts.map((p) => {
+  const isSupplierItem = p.id.startsWith('gsm-');
+  const { precoPor, precoDe } = isSupplierItem
+    ? applySupplierMarkup(p.precoPor)
+    : { precoPor: p.precoPor, precoDe: p.precoDe };
+  const maxParcelasSemJuros = precoPor >= 200 ? 12 : precoPor >= 80 ? 6 : 3;
+
+  return {
+    ...p,
+    precoDe,
+    precoPor,
+    maxParcelasSemJuros,
+    precoPix: calculatePixPrice(precoPor),
+    parcelamento: formatInstallment(precoPor, maxParcelasSemJuros),
+  };
+});
 
 export const TESTIMONIALS: Testimonial[] = [
   {

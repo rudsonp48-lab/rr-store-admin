@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { CategoryId, Product } from '../../../types/store';
-import { calculatePixPrice, formatInstallment } from '../../../data/defaults';
+import { applySupplierMarkup, calculatePixPrice, formatInstallment } from '../../../data/defaults';
 
 interface WooCategory {
   id: number;
@@ -156,16 +156,15 @@ export async function GET() {
       if (seen.has(pid)) return;
 
       const src = it.images?.[0]?.src || '';
-      const rawPrice = Number(it.prices?.price || 0) / 100;
-      const precoPor = Number(rawPrice.toFixed(2));
+      const rawCost = Number(it.prices?.price || 0) / 100;
 
-      if (!src || precoPor <= 0 || it.is_in_stock === false) return;
+      if (!src || rawCost <= 0 || it.is_in_stock === false) return;
       seen.add(pid);
 
       const cleanName = (it.name || '').replace(/\s+/g, ' ').trim();
       const catNames = (it.categories || []).map((c) => c.name || '');
       const categoria = mapCategory(cleanName, catNames);
-      const precoDe = Number((precoPor * 1.35).toFixed(2));
+      const { precoPor, precoDe } = applySupplierMarkup(rawCost);
       const precoPix = calculatePixPrice(precoPor);
       const maxParcelasSemJuros = precoPor >= 200 ? 12 : precoPor >= 80 ? 6 : 3;
       const parcelamento = formatInstallment(precoPor, maxParcelasSemJuros);
