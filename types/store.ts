@@ -23,6 +23,7 @@ export interface Product {
   id: string;
   nome: string;
   categoria: Exclude<CategoryId, 'Todos'>;
+  precoCusto?: number; // valor de atacado / custo no fornecedor (GSM Digital)
   precoDe: number;
   precoPor: number;
   precoPix: number; // 5% de desconto calculado automaticamente

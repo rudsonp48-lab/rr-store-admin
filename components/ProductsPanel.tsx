@@ -1,9 +1,16 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Pencil, Plus, RefreshCw, RotateCcw, Search, Trash2, X } from 'lucide-react';
+import { Pencil, Plus, RefreshCw, RotateCcw, Search, Sparkles, Trash2, TrendingUp, X } from 'lucide-react';
 import { Product } from '../types/store';
-import { CATEGORIES, PRODUCTS, calculatePixPrice, formatBRL, formatInstallment } from '../data/defaults';
+import {
+  applySupplierMarkup,
+  CATEGORIES,
+  PRODUCTS,
+  calculatePixPrice,
+  formatBRL,
+  formatInstallment,
+} from '../data/defaults';
 import ImageField from './ImageField';
 import { btnDanger, btnGhost, btnPrimary, Field, inputCls } from './ui';
 
@@ -18,6 +25,59 @@ const TAGS: Product['tag'][] = [
 
 const CATS = CATEGORIES.filter((c) => c.id !== 'Todos').map((c) => c.id) as Product['categoria'][];
 
+// Mapa rápido dos custos de atacado originais da GSM Digital
+const DEFAULT_BY_ID = new Map<string, Product>(PRODUCTS.map((p) => [p.id, p]));
+
+function enrichProductWithWholesale(p: Product): Product {
+  const def = DEFAULT_BY_ID.get(p.id);
+  const precoCusto =
+    typeof p.precoCusto === 'number' && p.precoCusto > 0
+      ? p.precoCusto
+      : def?.precoCusto ?? Number((p.precoPor / 1.38).toFixed(2));
+
+  // Se o produto no banco ainda estava com o preço antigo igual ao atacado (sem margem), aplica a margem de giro
+  const needsMarkupFix =
+    p.id.startsWith('gsm-') && Math.abs(p.precoPor - precoCusto) < 0.05;
+
+  if (needsMarkupFix) {
+    const { precoPor, precoDe } = applySupplierMarkup(precoCusto);
+    const maxParcelasSemJuros = precoPor >= 200 ? 12 : precoPor >= 80 ? 6 : 3;
+    return {
+      ...p,
+      precoCusto,
+      precoDe,
+      precoPor,
+      maxParcelasSemJuros,
+      precoPix: calculatePixPrice(precoPor),
+      parcelamento: formatInstallment(precoPor, maxParcelasSemJuros),
+    };
+  }
+
+  return {
+    ...p,
+    precoCusto,
+  };
+}
+
+function calcProfitMetrics(precoCusto: number, precoPor: number, precoPix: number) {
+  const cost = Math.max(0, Number(precoCusto) || 0);
+  const sale = Math.max(0, Number(precoPor) || 0);
+  const pix = Math.max(0, Number(precoPix) || calculatePixPrice(sale));
+  const profitSale = sale - cost;
+  const profitPctSale = cost > 0 ? (profitSale / cost) * 100 : 0;
+  const profitPix = pix - cost;
+  const profitPctPix = cost > 0 ? (profitPix / cost) * 100 : 0;
+  return {
+    cost,
+    sale,
+    pix,
+    profitSale,
+    profitPctSale,
+    profitPix,
+    profitPctPix,
+  };
+}
+
 interface Props {
   products: Product[];
   isPublished: boolean;
@@ -29,11 +89,12 @@ function emptyProduct(): Product {
     id: `p-${Date.now().toString(36)}`,
     nome: '',
     categoria: CATS[0],
-    precoDe: 0,
-    precoPor: 0,
-    precoPix: 0,
+    precoCusto: 20,
+    precoDe: 36.9,
+    precoPor: 28.9,
+    precoPix: calculatePixPrice(28.9),
     parcelamento: '',
-    maxParcelasSemJuros: 10,
+    maxParcelasSemJuros: 3,
     avaliacao: 5,
     avaliacoesCount: 0,
     tag: 'Novidade',
@@ -51,12 +112,41 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
   const [saving, setSaving] = useState(false);
   const [syncingSupplier, setSyncingSupplier] = useState(false);
 
+  const enrichedProducts = useMemo(
+    () => products.map(enrichProductWithWholesale),
+    [products]
+  );
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return products.filter(
+    return enrichedProducts.filter(
       (p) => (cat === 'Todos' || p.categoria === cat) && (!q || p.nome.toLowerCase().includes(q))
     );
-  }, [products, search, cat]);
+  }, [enrichedProducts, search, cat]);
+
+  const summary = useMemo(() => {
+    if (enrichedProducts.length === 0) {
+      return { avgMarginSale: 0, avgMarginPix: 0, supplierCount: 0 };
+    }
+    let totalPctSale = 0;
+    let totalPctPix = 0;
+    let validCount = 0;
+    let supplierCount = 0;
+    for (const p of enrichedProducts) {
+      if (p.id.startsWith('gsm-')) supplierCount++;
+      const m = calcProfitMetrics(p.precoCusto ?? 0, p.precoPor, p.precoPix);
+      if (m.cost > 0) {
+        totalPctSale += m.profitPctSale;
+        totalPctPix += m.profitPctPix;
+        validCount++;
+      }
+    }
+    return {
+      avgMarginSale: validCount > 0 ? totalPctSale / validCount : 0,
+      avgMarginPix: validCount > 0 ? totalPctPix / validCount : 0,
+      supplierCount,
+    };
+  }, [enrichedProducts]);
 
   const openNew = () => {
     setEditing(emptyProduct());
@@ -78,13 +168,14 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
       const supplierMap = new Map<string, Product>(
         data.products.map((p: Product) => [p.id, p])
       );
-      const updated = products.map((p) => {
+      const updated = enrichedProducts.map((p) => {
         const live = supplierMap.get(p.id);
         if (!live) return p;
         supplierMap.delete(p.id);
         return {
           ...p,
           nome: live.nome,
+          precoCusto: live.precoCusto,
           precoDe: live.precoDe,
           precoPor: live.precoPor,
           precoPix: live.precoPix,
@@ -109,12 +200,14 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editing) return;
+    const precoCusto = Math.max(0, Number(editing.precoCusto) || 0);
     const precoPor = Number(editing.precoPor);
     const parcelas = Number(editing.maxParcelasSemJuros) || 1;
     const final: Product = {
       ...editing,
       nome: editing.nome.trim(),
       descricao: editing.descricao.trim(),
+      precoCusto,
       precoDe: Number(editing.precoDe) || precoPor,
       precoPor,
       precoPix: calculatePixPrice(precoPor),
@@ -124,8 +217,8 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
     };
     setSaving(true);
     const next = isNew
-      ? [final, ...products]
-      : products.map((p) => (p.id === final.id ? final : p));
+      ? [final, ...enrichedProducts]
+      : enrichedProducts.map((p) => (p.id === final.id ? final : p));
     const ok = await publish(next, isNew ? 'Produto criado e publicado.' : 'Produto atualizado.');
     setSaving(false);
     if (ok) setEditing(null);
@@ -134,25 +227,38 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
   const remove = async (p: Product) => {
     if (!window.confirm(`Excluir "${p.nome}"? Essa ação publica a remoção na loja.`)) return;
     await publish(
-      products.filter((x) => x.id !== p.id),
+      enrichedProducts.filter((x) => x.id !== p.id),
       'Produto excluído.'
     );
   };
 
   const restoreDefaults = async () => {
-    if (!window.confirm('Substituir o catálogo atual pelo catálogo padrão? Alterações serão perdidas.'))
+    if (!window.confirm('Substituir o catálogo atual pelo catálogo padrão com margem de giro?'))
       return;
-    await publish(PRODUCTS, 'Catálogo padrão publicado.');
+    await publish(PRODUCTS, 'Catálogo padrão publicado com margem de lucro.');
   };
 
   const set = <K extends keyof Product>(k: K, v: Product[K]) =>
     setEditing((cur) => (cur ? { ...cur, [k]: v } : cur));
 
+  const applyAutoMarginToEditing = () => {
+    if (!editing) return;
+    const cost = Number(editing.precoCusto) || 0;
+    if (cost <= 0) return;
+    const { precoPor, precoDe } = applySupplierMarkup(cost);
+    setEditing({
+      ...editing,
+      precoPor,
+      precoDe,
+      precoPix: calculatePixPrice(precoPor),
+    });
+  };
+
   return (
     <section className="space-y-4">
       <div className="flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-lg font-bold">Produtos ({products.length})</h2>
+          <h2 className="text-lg font-bold">Produtos ({enrichedProducts.length})</h2>
           <p className="text-xs text-neutral-500">
             {isPublished
               ? 'Catálogo publicado — sincronizado com fornecedor GSM Digital Acessórios.'
@@ -164,7 +270,7 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
             onClick={syncSupplierNow}
             disabled={syncingSupplier}
             className={btnGhost}
-            title="Buscar novos produtos, preços e estoque direto de gsmdigitalacessorios.com.br"
+            title="Buscar novos produtos, preços de atacado e estoque direto de gsmdigitalacessorios.com.br"
           >
             <RefreshCw size={16} className={syncingSupplier ? 'animate-spin text-emerald-400' : 'text-emerald-400'} />
             {syncingSupplier ? 'Sincronizando GSM…' : 'Sincronizar GSM Digital'}
@@ -175,6 +281,43 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
           <button onClick={openNew} className={btnPrimary}>
             <Plus size={16} /> Novo produto
           </button>
+        </div>
+      </div>
+
+      {/* Resumo de Atacado & Margem de Lucro */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        <div className="rounded-xl border border-neutral-800 bg-neutral-950/90 p-3">
+          <span className="text-[11px] uppercase tracking-wider text-neutral-400 font-semibold">
+            Fornecedor GSM Digital
+          </span>
+          <p className="text-base font-bold text-white mt-0.5">
+            {summary.supplierCount} produtos sincronizados
+          </p>
+          <span className="text-[11px] text-neutral-500">
+            Valor de atacado monitorado em tempo real
+          </span>
+        </div>
+        <div className="rounded-xl border border-emerald-500/25 bg-emerald-950/15 p-3">
+          <span className="text-[11px] uppercase tracking-wider text-emerald-400 font-semibold flex items-center gap-1">
+            <TrendingUp size={13} /> Sua Margem Média (Venda Loja)
+          </span>
+          <p className="text-base font-bold text-emerald-400 mt-0.5">
+            +{summary.avgMarginSale.toFixed(1)}% sobre o atacado
+          </p>
+          <span className="text-[11px] text-neutral-400">
+            Margem configurada para giro rápido
+          </span>
+        </div>
+        <div className="rounded-xl border border-emerald-500/20 bg-neutral-950/90 p-3">
+          <span className="text-[11px] uppercase tracking-wider text-neutral-400 font-semibold">
+            Margem Média Líquida no PIX (5% OFF)
+          </span>
+          <p className="text-base font-bold text-emerald-300 mt-0.5">
+            +{summary.avgMarginPix.toFixed(1)}% de lucro líquido
+          </p>
+          <span className="text-[11px] text-neutral-500">
+            Já descontando os 5% de incentivo do PIX
+          </span>
         </div>
       </div>
 
@@ -198,36 +341,57 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
         </select>
       </div>
 
-      <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((p) => (
-          <li
-            key={p.id}
-            className="flex gap-3 rounded-xl border border-neutral-800 bg-neutral-950 p-2.5"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={p.imagem}
-              alt={p.nome}
-              loading="lazy"
-              className="w-16 h-16 rounded-lg object-cover bg-neutral-900 shrink-0"
-            />
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium leading-snug line-clamp-2">{p.nome}</p>
-              <p className="text-xs text-emerald-400 font-semibold mt-0.5">{formatBRL(p.precoPor)}</p>
-              <p className="text-[11px] text-neutral-500">
-                Estoque: {p.estoque} · {p.tag}
-              </p>
-            </div>
-            <div className="flex flex-col gap-1 shrink-0">
-              <button onClick={() => openEdit(p)} className={btnGhost} aria-label="Editar">
-                <Pencil size={14} />
-              </button>
-              <button onClick={() => remove(p)} className={btnDanger} aria-label="Excluir">
-                <Trash2 size={14} />
-              </button>
-            </div>
-          </li>
-        ))}
+      <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+        {filtered.map((p) => {
+          const m = calcProfitMetrics(p.precoCusto ?? 0, p.precoPor, p.precoPix);
+          return (
+            <li
+              key={p.id}
+              className="flex gap-3 rounded-xl border border-neutral-800 bg-neutral-950 p-3"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.imagem}
+                alt={p.nome}
+                loading="lazy"
+                className="w-16 h-16 rounded-lg object-contain bg-white p-1 shrink-0"
+              />
+              <div className="min-w-0 flex-1 space-y-1">
+                <p className="text-sm font-medium leading-snug line-clamp-2">{p.nome}</p>
+
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs">
+                  <span className="text-neutral-400">
+                    Atacado: <strong className="text-neutral-200">{formatBRL(m.cost)}</strong>
+                  </span>
+                  <span className="text-emerald-400 font-bold">
+                    Venda: {formatBRL(m.sale)}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                  <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 px-1.5 py-0.5 text-[11px] font-bold text-emerald-300">
+                    Lucro: +{formatBRL(m.profitSale)} (+{m.profitPctSale.toFixed(0)}%)
+                  </span>
+                  <span className="inline-flex items-center rounded-md bg-neutral-900 border border-neutral-800 px-1.5 py-0.5 text-[10px] text-neutral-400">
+                    No PIX: +{formatBRL(m.profitPix)} (+{m.profitPctPix.toFixed(0)}%)
+                  </span>
+                </div>
+
+                <p className="text-[11px] text-neutral-500">
+                  Estoque: {p.estoque} · {p.tag}
+                </p>
+              </div>
+              <div className="flex flex-col gap-1 shrink-0">
+                <button onClick={() => openEdit(p)} className={btnGhost} aria-label="Editar">
+                  <Pencil size={14} />
+                </button>
+                <button onClick={() => remove(p)} className={btnDanger} aria-label="Excluir">
+                  <Trash2 size={14} />
+                </button>
+              </div>
+            </li>
+          );
+        })}
         {filtered.length === 0 && (
           <li className="text-sm text-neutral-500 col-span-full py-8 text-center">
             Nenhum produto encontrado.
@@ -280,18 +444,33 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
                   ))}
                 </select>
               </Field>
-              <Field label="Preço de (R$)">
-                <input
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  inputMode="decimal"
-                  value={editing.precoDe}
-                  onChange={(e) => set('precoDe', e.target.value as unknown as number)}
-                  className={inputCls}
-                />
+
+              <Field
+                label="Valor de Atacado / Custo Fornecedor (R$)"
+                hint="Preço pago no fornecedor (GSM Digital)."
+              >
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    inputMode="decimal"
+                    value={editing.precoCusto ?? 0}
+                    onChange={(e) => set('precoCusto', e.target.value as unknown as number)}
+                    className={inputCls}
+                  />
+                  <button
+                    type="button"
+                    onClick={applyAutoMarginToEditing}
+                    className={btnGhost}
+                    title="Calcular preço de venda automaticamente com a margem de giro"
+                  >
+                    <Sparkles size={14} className="text-emerald-400" /> Giro
+                  </button>
+                </div>
               </Field>
-              <Field label="Preço por (R$)" hint="O preço no Pix (5% off) e o parcelamento são calculados sozinhos.">
+
+              <Field label="Preço de Venda Loja (R$)" hint="O preço no Pix (5% off) é calculado sozinho.">
                 <input
                   required
                   type="number"
@@ -303,6 +482,19 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
                   className={inputCls}
                 />
               </Field>
+
+              <Field label="Preço De / Âncora riscado (R$)">
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  inputMode="decimal"
+                  value={editing.precoDe}
+                  onChange={(e) => set('precoDe', e.target.value as unknown as number)}
+                  className={inputCls}
+                />
+              </Field>
+
               <Field label="Parcelas sem juros">
                 <input
                   type="number"
@@ -326,6 +518,42 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
               </Field>
             </div>
 
+            {/* Simulador de Lucro em Tempo Real */}
+            {(() => {
+              const m = calcProfitMetrics(
+                Number(editing.precoCusto) || 0,
+                Number(editing.precoPor) || 0,
+                calculatePixPrice(Number(editing.precoPor) || 0)
+              );
+              return (
+                <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-3.5 space-y-1.5">
+                  <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                    Resumo da Sua Margem de Lucro neste Produto
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                    <div className="bg-neutral-950/80 rounded-lg p-2 border border-neutral-800">
+                      <span className="text-neutral-400 block">Custo Atacado</span>
+                      <strong className="text-sm text-white">{formatBRL(m.cost)}</strong>
+                    </div>
+                    <div className="bg-neutral-950/80 rounded-lg p-2 border border-emerald-500/30">
+                      <span className="text-neutral-400 block">Lucro Venda Normal ({formatBRL(m.sale)})</span>
+                      <strong className="text-sm text-emerald-400">
+                        +{formatBRL(m.profitSale)} ({m.profitPctSale >= 0 ? '+' : ''}
+                        {m.profitPctSale.toFixed(1)}%)
+                      </strong>
+                    </div>
+                    <div className="bg-neutral-950/80 rounded-lg p-2 border border-neutral-800">
+                      <span className="text-neutral-400 block">Lucro no PIX ({formatBRL(m.pix)})</span>
+                      <strong className="text-sm text-emerald-300">
+                        +{formatBRL(m.profitPix)} ({m.profitPctPix >= 0 ? '+' : ''}
+                        {m.profitPctPix.toFixed(1)}%)
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
             <Field label="Foto do produto">
               <ImageField value={editing.imagem} onChange={(u) => set('imagem', u)} folder="produtos" />
             </Field>
@@ -347,9 +575,6 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
                 {saving ? 'Publicando…' : 'Salvar e publicar'}
               </button>
             </div>
-            {!editing.imagem && (
-              <p className="text-[11px] text-neutral-500 text-right">Adicione uma foto para salvar.</p>
-            )}
           </form>
         </div>
       )}

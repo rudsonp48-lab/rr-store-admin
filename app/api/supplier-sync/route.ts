@@ -178,6 +178,7 @@ export async function GET() {
         id: pid,
         nome: cleanName,
         categoria,
+        precoCusto: Number(rawCost.toFixed(2)),
         precoDe,
         precoPor,
         precoPix,
