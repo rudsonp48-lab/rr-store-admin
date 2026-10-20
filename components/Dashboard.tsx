@@ -50,7 +50,10 @@ export default function Dashboard({ user, onLogout }: { user: User; onLogout: ()
     setLoadError('');
     try {
       const s = await loadSettings();
-      if (s.products) setProducts(s.products);
+      if (s.products) {
+        const cloudIds = new Set(s.products.map((p) => p.id));
+        setProducts([...s.products, ...PRODUCTS.filter((p) => !cloudIds.has(p.id))]);
+      }
       if (s.regions) setRegions(s.regions);
       if (s.banners) setBanners(s.banners);
       setPublished({ products: !!s.products, regions: !!s.regions, banners: !!s.banners });
