@@ -52,7 +52,13 @@ export default function Dashboard({ user, onLogout }: { user: User; onLogout: ()
       const s = await loadSettings();
       if (s.products) {
         const cloudIds = new Set(s.products.map((p) => p.id));
-        setProducts([...s.products, ...PRODUCTS.filter((p) => !cloudIds.has(p.id))]);
+        const merged = [
+          ...PRODUCTS.filter((p) => !cloudIds.has(p.id)),
+          ...s.products,
+        ];
+        const apple = merged.filter((p) => p.id.startsWith('rr-apple-'));
+        const others = merged.filter((p) => !p.id.startsWith('rr-apple-'));
+        setProducts([...apple, ...others]);
       }
       if (s.regions) setRegions(s.regions);
       if (s.banners) setBanners(s.banners);
