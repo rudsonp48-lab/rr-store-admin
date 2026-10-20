@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Pencil, Plus, RotateCcw, Search, Trash2, X } from 'lucide-react';
+import { Pencil, Plus, RefreshCw, RotateCcw, Search, Trash2, X } from 'lucide-react';
 import { Product } from '../types/store';
 import { CATEGORIES, PRODUCTS, calculatePixPrice, formatBRL, formatInstallment } from '../data/defaults';
 import ImageField from './ImageField';
@@ -49,6 +49,7 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
   const [editing, setEditing] = useState<Product | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [syncingSupplier, setSyncingSupplier] = useState(false);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -64,6 +65,45 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
   const openEdit = (p: Product) => {
     setEditing({ ...p });
     setIsNew(false);
+  };
+
+  const syncSupplierNow = async () => {
+    setSyncingSupplier(true);
+    try {
+      const res = await fetch('/api/supplier-sync');
+      const data = await res.json();
+      if (!res.ok || !Array.isArray(data.products)) {
+        throw new Error(data.error || 'Falha ao sincronizar fornecedor');
+      }
+      const supplierMap = new Map<string, Product>(
+        data.products.map((p: Product) => [p.id, p])
+      );
+      const updated = products.map((p) => {
+        const live = supplierMap.get(p.id);
+        if (!live) return p;
+        supplierMap.delete(p.id);
+        return {
+          ...p,
+          nome: live.nome,
+          precoDe: live.precoDe,
+          precoPor: live.precoPor,
+          precoPix: live.precoPix,
+          parcelamento: live.parcelamento,
+          imagem: live.imagem || p.imagem,
+          estoque: live.estoque,
+        };
+      });
+      const newItems = Array.from(supplierMap.values());
+      const merged = [...newItems, ...updated];
+      await publish(
+        merged,
+        `Sincronizado com GSM Digital (${data.products.length} produtos verificados, ${newItems.length} novos).`
+      );
+    } catch (e) {
+      alert(`Erro ao sincronizar com GSM Digital: ${(e as Error).message}`);
+    } finally {
+      setSyncingSupplier(false);
+    }
   };
 
   const save = async (e: React.FormEvent) => {
@@ -115,11 +155,20 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
           <h2 className="text-lg font-bold">Produtos ({products.length})</h2>
           <p className="text-xs text-neutral-500">
             {isPublished
-              ? 'Catálogo publicado — alterações vão direto para a loja.'
-              : 'Ainda não publicado: a loja usa o catálogo padrão. Salve um produto ou publique o padrão.'}
+              ? 'Catálogo publicado — sincronizado com fornecedor GSM Digital Acessórios.'
+              : 'Sincronização automática ativa com GSM Digital Acessórios.'}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={syncSupplierNow}
+            disabled={syncingSupplier}
+            className={btnGhost}
+            title="Buscar novos produtos, preços e estoque direto de gsmdigitalacessorios.com.br"
+          >
+            <RefreshCw size={16} className={syncingSupplier ? 'animate-spin text-emerald-400' : 'text-emerald-400'} />
+            {syncingSupplier ? 'Sincronizando GSM…' : 'Sincronizar GSM Digital'}
+          </button>
           <button onClick={restoreDefaults} className={btnGhost}>
             <RotateCcw size={16} /> {isPublished ? 'Restaurar padrão' : 'Publicar padrão'}
           </button>
