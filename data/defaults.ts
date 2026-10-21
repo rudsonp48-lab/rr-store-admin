@@ -188,7 +188,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 18,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5412162/0_0a9da38f-0aa1-41ee-a06f-456d7174a604.jpeg.jpg?v=639219831755470000",
       "descricao": "Smartphone Realme Note 80S com 128GB de armazenamento interno, 4GB RAM, tela fluida de 90Hz, bateria de 5000mAh de longa duração e câmera com inteligência artificial. Produto novo, lacrado com garantia local em Brasília-DF.",
       "estoque": 8
   },
@@ -203,7 +203,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 27,
       "tag": "Novidade",
-      "imagem": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5410843/1_18c44fe6-ff90-42da-9d43-9d4a530fcb83.jpeg.jpg?v=639219802654570000",
       "descricao": "Realme C100i com NFC para pagamentos por aproximação, 128GB de armazenamento, design ultrafino e elegante na cor Roxo Cósmico, carregamento rápido e câmera de alta resolução. Entrega hoje via Motoboy no DF.",
       "estoque": 6
   },
@@ -218,7 +218,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 36,
       "tag": "Oferta Flash",
-      "imagem": "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5410816/1_a96b3069-4088-4754-b458-b7fc448c04b7.jpeg.jpg?v=639219801651470000",
       "descricao": "Realme Note 70 versão potente de 256GB com 8GB RAM (expansível via DRE). Perfeito para jogos, multitarefas e redes sociais. Acompanha carregador original e garantia.",
       "estoque": 7
   },
@@ -233,7 +233,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 45,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/4990654/17805672821381.jpg?v=639162743288700000",
       "descricao": "Xiaomi Redmi 15C oficial com tela imersiva de 6.74 polegadas, câmera de 50MP com IA, processador Octa-Core veloz e bateria de 5000mAh. Ideal para o dia a dia e estudos.",
       "estoque": 10
   },
@@ -248,7 +248,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 54,
       "tag": "Novidade",
-      "imagem": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/4050204/17710764682956.jpg?v=639066732922500000",
       "descricao": "Novo lançamento Xiaomi Redmi 17 com design refinado, bordas finas, câmera aprimorada para fotos noturnas e bateria inteligente com economia extrema. Pronta entrega no SIA.",
       "estoque": 8
   },
@@ -263,7 +263,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 63,
       "tag": "Favorito no DF",
-      "imagem": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5550916/17743809740462.jpg?v=639241302492270000",
       "descricao": "Xiaomi Note 14S com generosos 256GB de espaço e 8GB de memória RAM. Tela AMOLED vibrante com cores vivas e alto-falantes estéreo imersivos. Retirada ou Motoboy no DF.",
       "estoque": 5
   },
@@ -278,7 +278,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 72,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Xiaomi_Redmi_Note_10_Pro.jpg",
       "descricao": "Potência pura: Xiaomi Note 17 256GB/8GB com suporte a carregamento ultra-rápido, display de 120Hz e conjunto de lentes profissionais de alta nitidez.",
       "estoque": 5
   },
@@ -293,7 +293,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 81,
       "tag": "Oferta Flash",
-      "imagem": "https://images.unsplash.com/photo-1585060544812-6b45742d762f?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/4969195/17799190188431.jpg",
       "descricao": "A linha Poco campeã de custo-benefício: 256GB e 8GB RAM por um valor acessível. Desempenho confiável para multitarefas e entretenimento.",
       "estoque": 7
   },
@@ -308,7 +308,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 26,
       "tag": "Novidade",
-      "imagem": "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/4969294/17799182703691.jpg",
       "descricao": "Monstro gamer: Poco X8 Pro 5G com 512GB de armazenamento, incríveis 12GB RAM, refrigeração líquida LiquidCool e tela CrystalRes de 120Hz. Pronta-entrega em Brasília.",
       "estoque": 4
   },
@@ -323,7 +323,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 35,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5572889/17889778059557.jpg",
       "descricao": "Qualidade Samsung: Galaxy A07 com 128GB expansível, bateria durável de 5000mAh e interface One UI limpa e segura. Garantia de procedência no SIA.",
       "estoque": 9
   },
@@ -338,7 +338,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 44,
       "tag": "Favorito no DF",
-      "imagem": "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/4685243/17773862671424.jpg",
       "descricao": "Samsung Galaxy A27 5G com tela Super AMOLED fluida, câmera tripla com estabilização óptica (OIS), 256GB de espaço e velocidade 5G em todo o DF.",
       "estoque": 5
   },
@@ -353,7 +353,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 53,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1606318801954-d46d46d3360a?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Playstation_DualSense_Controller.png",
       "descricao": "Controle oficial Sony DualSense para PS5 e PC com resposta tátil imersiva, gatilhos adaptáveis dinâmicos e microfone integrado. Edição especial Camuflada.",
       "estoque": 8
   },
@@ -368,7 +368,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 62,
       "tag": "Novidade",
-      "imagem": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5534900/17879486241650.jpg?v=639238905140330000",
       "descricao": "Estação de carregamento rápida por indução/encaixe para até 2 controles de PS5 simultaneamente. Mantém seus controles sempre prontos para a ação.",
       "estoque": 12
   },
@@ -383,7 +383,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 71,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5055680/0_0_67eaea19094d93282e2919ef.jpg",
       "descricao": "Som lendário JBL Original Pro Sound: potência aprimorada com radiadores passivos duplos, certificação IP67 contra água e poeira, e até 14 horas de bateria ininterruptas.",
       "estoque": 6
   },
@@ -398,7 +398,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 80,
       "tag": "Novidade",
-      "imagem": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/3986365/17707179676194.jpg",
       "descricao": "Design aberto ergonômico Open-Ear com encaixe seguro tipo Clip. Cancelamento de ruído por IA nas chamadas, graves encorpados e bateria para o dia todo.",
       "estoque": 10
   },
@@ -413,7 +413,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 25,
       "tag": "Oferta Flash",
-      "imagem": "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/3743413/17665070237205.jpg",
       "descricao": "Super acessível e potente: drivers dinâmicos com reforço de graves Bass Boost, baixa latência para games e estojo compacto para levar no bolso.",
       "estoque": 15
   },
@@ -428,7 +428,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 34,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/2406064/17602436161207.jpg?v=638961367607130000",
       "descricao": "Headphone Over-Ear acolchoado Fortrek com tecnologia ANC Deep para isolamento acústico em estudos e trabalho no DF. Dobrável e com entrada auxiliar P2.",
       "estoque": 14
   },
@@ -443,7 +443,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 43,
       "tag": "Favorito no DF",
-      "imagem": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/2430543/17602613662374.jpg?v=638961564753900000",
       "descricao": "Smartwatch premium Amazfit com tela AMOLED HD, GPS de alta precisão integrado, monitoramento cardíaco e sono com Zepp Coach IA, resistente a 5ATM.",
       "estoque": 5
   },
@@ -458,7 +458,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 52,
       "tag": "Novidade",
-      "imagem": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/4987278/17795274877446.jpg?v=639162654160370000",
       "descricao": "Display gigante ultra-nítido, notificações em tempo real do WhatsApp, medição de oxigênio SpO2 e bateria com duração de até 14 dias com 1 única carga.",
       "estoque": 6
   },
@@ -473,7 +473,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 61,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5131293/0_0_675b43e3447c42f8bd0a04ac.jpg?v=639180751853670000",
       "descricao": "Corpo circular em metal de alta resistência, coroa giratória navegável, chamadas Bluetooth via viva-voz e kit completo com duas pulseiras intercambiáveis.",
       "estoque": 12
   },
@@ -488,7 +488,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 70,
       "tag": "Oferta Flash",
-      "imagem": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/2430543/17602613662374.jpg?v=638961564753900000",
       "descricao": "O melhor custo-benefício de relógio inteligente do mercado: mais de 100 modos esportivos, monitoramento de passos e calorias, leve e confortável para o dia a dia.",
       "estoque": 16
   },
@@ -503,7 +503,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 79,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Sandisk_SSD_and_connectors.jpg",
       "descricao": "Reviva seu PC ou Notebook: inicialização até 20x mais rápida que um disco rígido tradicional. Leitura de 535MB/s e alta durabilidade comprovada SanDisk.",
       "estoque": 8
   },
@@ -518,7 +518,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 24,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Kingston_HyperX_120GB_3K_SSD.JPG",
       "descricao": "Unidade de estado sólido Kingston A400 240GB. Ideal para agilizar carregamento de programas, boot do Windows e produtividade imediata no escritório ou estudos.",
       "estoque": 15
   },
@@ -533,7 +533,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 33,
       "tag": "Novidade",
-      "imagem": "https://images.unsplash.com/photo-1588702547919-26089e690ecc?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://upload.wikimedia.org/wikipedia/commons/7/75/Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg",
       "descricao": "Transforme seu SSD M.2 em um disco externo ultrarrápido USB-C 10Gbps. Corpo em liga de alumínio com dissipação passiva de calor. Plug and Play.",
       "estoque": 18
   },
@@ -548,7 +548,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 42,
       "tag": "Mais Vendido",
-      "imagem": "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5551468/17884283287048.jpg?v=639241302636670000",
       "descricao": "Transforme qualquer TV em Smart com Android TV oficial: Netflix, YouTube, Prime Video, Disney+ e comando por voz Google Assistente no controle.",
       "estoque": 11
   },
