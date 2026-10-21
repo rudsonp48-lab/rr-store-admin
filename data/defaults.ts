@@ -1,6 +1,8 @@
 import { CategoryInfo, DFRegion, Product, Testimonial } from '../types/store';
 
-export const WHATSAPP_NUMBER = '5561999999999';
+export const WHATSAPP_NUMBER = '5561998151299';
+export const WHATSAPP_NUMBER_SECONDARY = '5561985964112';
+export const STORE_ADDRESS = 'Feira dos Importados do SIA — Conjunto D, Loja D439 • SIA Trecho 7, Brasília - DF';
 
 export function calculatePixPrice(precoPor: number): number {
   return Number((precoPor * 0.95).toFixed(2));
