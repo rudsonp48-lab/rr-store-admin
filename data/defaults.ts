@@ -563,7 +563,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 42,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/2154628/17577087322411.jpg?v=638933067932830000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-whitetitanium?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "Experimente a excelência em tecnologia mobile com o iPhone 17 Pro Max Apple de 512GB na elegante cor Silver (Prateado), versão Americana (eSIM). Conta com impressionante tela Super Retina XDR de 6,9 polegadas com ProMotion 120Hz, conectividade 5G ultrarrápida, sistema de câmera Pro de 48MP com zoom óptico avançado, gravação em 4K Dolby Vision e estrutura em titânio aeroespacial de altíssima resistência. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 5
   },
@@ -578,7 +578,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.9,
       "avaliacoesCount": 49,
       "tag": "Oferta Flash",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5411081/0_e19cb787-382b-4264-8312-8703be564521.jpeg.jpg?v=639219807883800000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-deserttitanium?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "Experimente a excelência em tecnologia mobile com o iPhone 17 Pro Max 256GB na vibrante cor Laranja-Cósmico (Modelo Americano 🇺🇸). Equipado com tela Super Retina XDR de 6,9\", 5G, câmera tripla Pro de 48MP, chip de última geração com Apple Intelligence, bateria de longa duração para o dia todo e porta USB-C com velocidade USB 3. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 6
   },
@@ -623,7 +623,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 70,
       "tag": "Novidade",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5582713/17892122194563.jpg?v=639271508292970000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-deserttitanium?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "Lançamento absoluto na RR-MOBILE: iPhone 18 Pro Max 256GB (Americano 🇺🇸) na exclusiva cor Bordô. O ápice de desempenho da Apple com tela ProMotion de 6,9 polegadas com bordas ultrafinas, chip de nova geração com Apple Intelligence avançada, sistema triplo de câmeras de 48MP com teleobjetiva periscópica e máxima autonomia de bateria. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -728,7 +728,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.9,
       "avaliacoesCount": 119,
       "tag": "Novidade",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5646198/0_14014a3a-49c6-4eed-bd84-44bf86498413.jpeg.jpg?v=639263659571030000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/watch-compare-series-12-202609_GEO_BR?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "Edição especial Apple Watch Series 12 42mm com acabamento Dourado e Pulseira Esportiva Bordô. Combinação sofisticada de joia tecnológica e performance esportiva, com sensores de saúde de alta precisão, tela Retina Sempre Ativa e resistência à água de 50 metros. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -833,7 +833,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 73,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5647289/0_c636e66c-b31e-49b1-9dde-7f36325fa745.jpeg.jpg?v=639263849923430000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/watch-compare-ultra-4-202609_GEO_BR?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "O relógio mais robusto e capaz da Apple: Apple Watch Ultra 3 de 49mm com Caixa Preta de Titânio e Pulseira em Tecido de alta resistência. Conta com GPS de dupla frequência (L1 e L5) ultriso, tela de cristal de safira plana superbrilhante, Botão de Ação personalizável, sirene integrada, resistência à água de 100m e bateria para vários dias de aventura. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -878,7 +878,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.9,
       "avaliacoesCount": 94,
       "tag": "Novidade",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5396102/0_e9a66fda-4035-4c03-9364-9ca6dc88cd49.jpeg.jpg?v=639217381755470000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-midnight-select-202402?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "MacBook Neo de 13 polegadas Chip A18 Pro (CPU de 6 núcleos, GPU de 5 núcleos), 8GB RAM e 256GB SSD na cor Citrus (Amarelo-Cítrico) — Produto Lacrado. Combina portabilidade extrema, inicialização instantânea, webcam Full HD e suporte completo ao ecossistema Apple Intelligence. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 5
   },
@@ -923,7 +923,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 115,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5395426/0_dcb67058-2a92-44ed-8c40-e352cb2b1c09.jpeg.jpg?v=639217357736370000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-midnight-select-202402?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "MacBook Air 13\" Apple com o revolucionário Chip M5, Neural Engine de 16 núcleos, 16GB de memória RAM unificada e 512GB SSD na cor Midnight (Meia-Noite). Desempenho profissional silencioso (sem ventoinha), tela Liquid Retina de 13,6\", MagSafe 3, duas portas Thunderbolt e até 18 horas de bateria. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -1043,7 +1043,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 76,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5160816/0_0_675b42bf447c42f8bd09eb13.jpg?v=639183782612100000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-13-select-wifi-spaceblack-202405?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "iPad Pro Apple de 13 polegadas com Processador M5, 256GB Wi-Fi na cor Preto-Espacial. Tela Ultra Retina XDR com tecnologia OLED em tandem de brilho e contraste extremos, espessura ultrafina de 5,1 mm, compatibilidade com Apple Pencil Pro e desempenho gráfico de nível workstation. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -1283,7 +1283,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 93,
       "tag": "Novidade",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/4789351/0_0_675b42c5447c42f8bd09eba4.jpg?v=639142995853330000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-max-select-202409-blue?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "Apple AirPods Max 2 Over-the-Ear na cor Azul com conector USB-C. Experiência de áudio de altíssima fidelidade com driver dinâmico criado pela Apple, Cancelamento Ativo de Ruído de nível profissional, Modo Ambiente, Áudio Espacial Personalizado com rastreamento dinâmico da cabeça e conchas em alumínio anodizado. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -1373,7 +1373,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 135,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5381364/0_50614ecd-053a-4162-84a1-6cf463138411.jpeg.jpg?v=639215534067600000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-pro-2-hero-select-202409?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "Apple AirPods Pro 3 com Cancelamento Ativo de Ruído até 2x mais potente e Estojo de Recarga MagSafe (USB-C). Acompanha ponteiras de silicone em múltiplos tamanhos (PP, P, M, G), Controle por Toque na haste para ajuste de volume, Detecção de Conversa, recursos avançados de Saúde Auditiva e certificação IP54. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 10
   },
