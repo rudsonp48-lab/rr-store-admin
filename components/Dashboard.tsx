@@ -51,10 +51,23 @@ export default function Dashboard({ user, onLogout }: { user: User; onLogout: ()
     try {
       const s = await loadSettings();
       if (s.products) {
+        const localMap = new Map(PRODUCTS.map((p) => [p.id, p]));
         const cloudIds = new Set(s.products.map((p) => p.id));
+        const sanitizedCloud = s.products.map((cp) => {
+          const local = localMap.get(cp.id);
+          if (local && (cp.id.startsWith('rr-apple-') || cp.id.startsWith('sousa-'))) {
+            return {
+              ...cp,
+              nome: local.nome,
+              imagem: local.imagem,
+              descricao: local.descricao,
+            };
+          }
+          return cp;
+        });
         const merged = [
           ...PRODUCTS.filter((p) => !cloudIds.has(p.id)),
-          ...s.products,
+          ...sanitizedCloud,
         ];
         const apple = merged.filter((p) => p.id.startsWith('rr-apple-'));
         const others = merged.filter((p) => !p.id.startsWith('rr-apple-'));

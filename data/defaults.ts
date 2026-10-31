@@ -278,7 +278,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 72,
       "tag": "Mais Vendido",
-      "imagem": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Xiaomi_Redmi_Note_10_Pro.jpg",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5474279/17839785509654.jpg?v=639228574635070000",
       "descricao": "Potência pura: Xiaomi Note 17 256GB/8GB com suporte a carregamento ultra-rápido, display de 120Hz e conjunto de lentes profissionais de alta nitidez.",
       "estoque": 5
   },
@@ -353,7 +353,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 53,
       "tag": "Mais Vendido",
-      "imagem": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Playstation_DualSense_Controller.png",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5605988/17883601858533.jpg?v=639253424969630000",
       "descricao": "Controle oficial Sony DualSense para PS5 e PC com resposta tátil imersiva, gatilhos adaptáveis dinâmicos e microfone integrado. Edição especial Camuflada.",
       "estoque": 8
   },
@@ -368,7 +368,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 62,
       "tag": "Novidade",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5534900/17879486241650.jpg?v=639238905140330000",
+      "imagem": "https://images.kabum.com.br/produtos/fotos/238164/base-de-carregamento-sony-para-controle-dualsense_1632859091_gg.jpg",
       "descricao": "Estação de carregamento rápida por indução/encaixe para até 2 controles de PS5 simultaneamente. Mantém seus controles sempre prontos para a ação.",
       "estoque": 12
   },
@@ -383,7 +383,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 71,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5055680/0_0_67eaea19094d93282e2919ef.jpg",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5052603/1_1_67eaea19094d93282e2919f0.jpg",
       "descricao": "Som lendário JBL Original Pro Sound: potência aprimorada com radiadores passivos duplos, certificação IP67 contra água e poeira, e até 14 horas de bateria ininterruptas.",
       "estoque": 6
   },
@@ -488,7 +488,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 70,
       "tag": "Oferta Flash",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/2430543/17602613662374.jpg?v=638961564753900000",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5551098/17764168654806.jpg?v=639241302615530000",
       "descricao": "O melhor custo-benefício de relógio inteligente do mercado: mais de 100 modos esportivos, monitoramento de passos e calorias, leve e confortável para o dia a dia.",
       "estoque": 16
   },
@@ -503,7 +503,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 79,
       "tag": "Mais Vendido",
-      "imagem": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Sandisk_SSD_and_connectors.jpg",
+      "imagem": "https://images.kabum.com.br/produtos/fotos/369074/ssd-sandisk-plus-1tb-sata-iii-leitura-535mb-s-gravacao-450mb-s-sdssda-1t00-g27_1660219950_gg.jpg",
       "descricao": "Reviva seu PC ou Notebook: inicialização até 20x mais rápida que um disco rígido tradicional. Leitura de 535MB/s e alta durabilidade comprovada SanDisk.",
       "estoque": 8
   },
@@ -518,7 +518,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 24,
       "tag": "Mais Vendido",
-      "imagem": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Kingston_HyperX_120GB_3K_SSD.JPG",
+      "imagem": "https://images.kabum.com.br/produtos/fotos/85197/85197_1484306076_gg.jpg",
       "descricao": "Unidade de estado sólido Kingston A400 240GB. Ideal para agilizar carregamento de programas, boot do Windows e produtividade imediata no escritório ou estudos.",
       "estoque": 15
   },
@@ -533,7 +533,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.8,
       "avaliacoesCount": 33,
       "tag": "Novidade",
-      "imagem": "https://upload.wikimedia.org/wikipedia/commons/7/75/Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg",
+      "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/628538/Case-Para-SSD-M-2-Sata-E-Nvme-2230-2260-2280-Usb-C-Usb-3-0_1724271767_gg.jpg",
       "descricao": "Transforme seu SSD M.2 em um disco externo ultrarrápido USB-C 10Gbps. Corpo em liga de alumínio com dissipação passiva de calor. Plug and Play.",
       "estoque": 18
   },
@@ -563,7 +563,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 42,
       "tag": "Mais Vendido",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-whitetitanium?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/2154628/17577087322411.jpg?v=638933067932830000",
       "descricao": "Experimente a excelência em tecnologia mobile com o iPhone 17 Pro Max Apple de 512GB na elegante cor Silver (Prateado), versão Americana (eSIM). Conta com impressionante tela Super Retina XDR de 6,9 polegadas com ProMotion 120Hz, conectividade 5G ultrarrápida, sistema de câmera Pro de 48MP com zoom óptico avançado, gravação em 4K Dolby Vision e estrutura em titânio aeroespacial de altíssima resistência. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 5
   },
@@ -578,7 +578,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.9,
       "avaliacoesCount": 49,
       "tag": "Oferta Flash",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-deserttitanium?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5411081/0_e19cb787-382b-4264-8312-8703be564521.jpeg.jpg?v=639219807883800000",
       "descricao": "Experimente a excelência em tecnologia mobile com o iPhone 17 Pro Max 256GB na vibrante cor Laranja-Cósmico (Modelo Americano 🇺🇸). Equipado com tela Super Retina XDR de 6,9\", 5G, câmera tripla Pro de 48MP, chip de última geração com Apple Intelligence, bateria de longa duração para o dia todo e porta USB-C com velocidade USB 3. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 6
   },
@@ -623,7 +623,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 70,
       "tag": "Novidade",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-deserttitanium?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5582713/17892122194563.jpg?v=639271508292970000",
       "descricao": "Lançamento absoluto na RR-MOBILE: iPhone 18 Pro Max 256GB (Americano 🇺🇸) na exclusiva cor Bordô. O ápice de desempenho da Apple com tela ProMotion de 6,9 polegadas com bordas ultrafinas, chip de nova geração com Apple Intelligence avançada, sistema triplo de câmeras de 48MP com teleobjetiva periscópica e máxima autonomia de bateria. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -728,7 +728,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.9,
       "avaliacoesCount": 119,
       "tag": "Novidade",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/watch-compare-series-12-202609_GEO_BR?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5647709/0_926b3fd8-c741-4bc7-8eb3-4cb6ff625c61.jpeg.jpg?v=639263860354600000",
       "descricao": "Edição especial Apple Watch Series 12 42mm com acabamento Dourado e Pulseira Esportiva Bordô. Combinação sofisticada de joia tecnológica e performance esportiva, com sensores de saúde de alta precisão, tela Retina Sempre Ativa e resistência à água de 50 metros. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -833,7 +833,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 73,
       "tag": "Mais Vendido",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/watch-compare-ultra-4-202609_GEO_BR?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5381373/0_0_675b42ce447c42f8bd09ec73.jpg?v=639215534292370000",
       "descricao": "O relógio mais robusto e capaz da Apple: Apple Watch Ultra 3 de 49mm com Caixa Preta de Titânio e Pulseira em Tecido de alta resistência. Conta com GPS de dupla frequência (L1 e L5) ultriso, tela de cristal de safira plana superbrilhante, Botão de Ação personalizável, sirene integrada, resistência à água de 100m e bateria para vários dias de aventura. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -878,7 +878,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.9,
       "avaliacoesCount": 94,
       "tag": "Novidade",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-midnight-select-202402?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5396102/0_e9a66fda-4035-4c03-9364-9ca6dc88cd49.jpeg.jpg?v=639217381755470000",
       "descricao": "MacBook Neo de 13 polegadas Chip A18 Pro (CPU de 6 núcleos, GPU de 5 núcleos), 8GB RAM e 256GB SSD na cor Citrus (Amarelo-Cítrico) — Produto Lacrado. Combina portabilidade extrema, inicialização instantânea, webcam Full HD e suporte completo ao ecossistema Apple Intelligence. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 5
   },
@@ -923,7 +923,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 115,
       "tag": "Mais Vendido",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-midnight-select-202402?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5395971/0_253726c2-a5c7-4527-9721-57900d861175.jpeg.jpg?v=639217376640200000",
       "descricao": "MacBook Air 13\" Apple com o revolucionário Chip M5, Neural Engine de 16 núcleos, 16GB de memória RAM unificada e 512GB SSD na cor Midnight (Meia-Noite). Desempenho profissional silencioso (sem ventoinha), tela Liquid Retina de 13,6\", MagSafe 3, duas portas Thunderbolt e até 18 horas de bateria. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -1013,7 +1013,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 62,
       "tag": "Entrega Hoje DF",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5034363/0_0_675b429b447c42f8bd09e74d.jpg?v=639168302823630000",
+      "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/1002297/xlarge/Magic-Keyboard-Para-Ipad-Pro-11-M4-M5_1786559012.jpg",
       "descricao": "Magic Keyboard Original Apple para iPad Pro de 13 polegadas (M4 / M5) na cor Preta. Design suspenso flutuante com ajuste suave de inclinação, teclas retroiluminadas, fila de teclas de função, trackpad com resposta tátil e proteção frontal e traseira. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 3
   },
@@ -1043,7 +1043,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 76,
       "tag": "Mais Vendido",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-13-select-wifi-spaceblack-202405?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5396764/0_0_675b42bd447c42f8bd09eae2.jpg?v=639217400488500000",
       "descricao": "iPad Pro Apple de 13 polegadas com Processador M5, 256GB Wi-Fi na cor Preto-Espacial. Tela Ultra Retina XDR com tecnologia OLED em tandem de brilho e contraste extremos, espessura ultrafina de 5,1 mm, compatibilidade com Apple Pencil Pro e desempenho gráfico de nível workstation. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -1193,7 +1193,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 51,
       "tag": "Entrega Hoje DF",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5034307/0_0_675b4294447c42f8bd09e68e.jpg?v=639168298484930000",
+      "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/948291/xlarge/Mouse-Magic-Apple-Multi-touch-Bluetooth-Branco_1784705928.jpg",
       "descricao": "Magic Mouse 3 Original Apple com porta de recarga USB-C e superfície Multi-Touch na cor Branco. Sem fio e recarregável, com base otimizada que desliza suavemente pela mesa e suporte a gestos simples como passar o dedo entre páginas e rolar documentos. Acompanha cabo USB-C trançado na caixa. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 8
   },
@@ -1208,7 +1208,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.9,
       "avaliacoesCount": 58,
       "tag": "Favorito no DF",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5034363/0_0_675b429b447c42f8bd09e74d.jpg?v=639168302823630000",
+      "imagem": "https://images.kabum.com.br/produtos/fotos/463095/magic-mouse-black-multi-touch-surface-mmmq3be-a_1686757928_gg.jpg",
       "descricao": "Magic Mouse 3 Original Apple com conector USB-C e superfície Multi-Touch na exclusiva cor Preta. Bateria interna de longa duração que funciona por um mês ou mais entre recargas, pareamento automático com seu Mac e cabo USB-C trançado preto incluso. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 6
   },
@@ -1283,7 +1283,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 93,
       "tag": "Novidade",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-max-select-202409-blue?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5103437/0_0_675b42c5447c42f8bd09eb9d.jpg?v=639179209964070000",
       "descricao": "Apple AirPods Max 2 Over-the-Ear na cor Azul com conector USB-C. Experiência de áudio de altíssima fidelidade com driver dinâmico criado pela Apple, Cancelamento Ativo de Ruído de nível profissional, Modo Ambiente, Áudio Espacial Personalizado com rastreamento dinâmico da cabeça e conchas em alumínio anodizado. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -1373,7 +1373,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 135,
       "tag": "Mais Vendido",
-      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-pro-2-hero-select-202409?wid=2000&hei=2000&fmt=png-alpha",
+      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5598359/0_98967c72-9214-4d94-be45-951404a5eb32.jpeg.jpg?v=639251763598270000",
       "descricao": "Apple AirPods Pro 3 com Cancelamento Ativo de Ruído até 2x mais potente e Estojo de Recarga MagSafe (USB-C). Acompanha ponteiras de silicone em múltiplos tamanhos (PP, P, M, G), Controle por Toque na haste para ajuste de volume, Detecção de Conversa, recursos avançados de Saúde Auditiva e certificação IP54. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 10
   },
