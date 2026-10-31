@@ -728,7 +728,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 4.9,
       "avaliacoesCount": 119,
       "tag": "Novidade",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5647709/0_926b3fd8-c741-4bc7-8eb3-4cb6ff625c61.jpeg.jpg?v=639263860354600000",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5646198/0_14014a3a-49c6-4eed-bd84-44bf86498413.jpeg.jpg?v=639263659571030000",
       "descricao": "Edição especial Apple Watch Series 12 42mm com acabamento Dourado e Pulseira Esportiva Bordô. Combinação sofisticada de joia tecnológica e performance esportiva, com sensores de saúde de alta precisão, tela Retina Sempre Ativa e resistência à água de 50 metros. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -833,7 +833,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 73,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5381373/0_0_675b42ce447c42f8bd09ec73.jpg?v=639215534292370000",
+      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5647289/0_c636e66c-b31e-49b1-9dde-7f36325fa745.jpeg.jpg?v=639263849923430000",
       "descricao": "O relógio mais robusto e capaz da Apple: Apple Watch Ultra 3 de 49mm com Caixa Preta de Titânio e Pulseira em Tecido de alta resistência. Conta com GPS de dupla frequência (L1 e L5) ultriso, tela de cristal de safira plana superbrilhante, Botão de Ação personalizável, sirene integrada, resistência à água de 100m e bateria para vários dias de aventura. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -923,7 +923,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 115,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5395971/0_253726c2-a5c7-4527-9721-57900d861175.jpeg.jpg?v=639217376640200000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-midnight-select-202402?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "MacBook Air 13\" Apple com o revolucionário Chip M5, Neural Engine de 16 núcleos, 16GB de memória RAM unificada e 512GB SSD na cor Midnight (Meia-Noite). Desempenho profissional silencioso (sem ventoinha), tela Liquid Retina de 13,6\", MagSafe 3, duas portas Thunderbolt e até 18 horas de bateria. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -1043,7 +1043,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 76,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vtexassets.com/arquivos/ids/5396764/0_0_675b42bd447c42f8bd09eae2.jpg?v=639217400488500000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-13-select-wifi-spaceblack-202405?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "iPad Pro Apple de 13 polegadas com Processador M5, 256GB Wi-Fi na cor Preto-Espacial. Tela Ultra Retina XDR com tecnologia OLED em tandem de brilho e contraste extremos, espessura ultrafina de 5,1 mm, compatibilidade com Apple Pencil Pro e desempenho gráfico de nível workstation. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -1283,7 +1283,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 93,
       "tag": "Novidade",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5103437/0_0_675b42c5447c42f8bd09eb9d.jpg?v=639179209964070000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-max-select-202409-blue?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "Apple AirPods Max 2 Over-the-Ear na cor Azul com conector USB-C. Experiência de áudio de altíssima fidelidade com driver dinâmico criado pela Apple, Cancelamento Ativo de Ruído de nível profissional, Modo Ambiente, Áudio Espacial Personalizado com rastreamento dinâmico da cabeça e conchas em alumínio anodizado. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 4
   },
@@ -1373,7 +1373,7 @@ const rawProducts: Array<Omit<Product, 'precoPix' | 'parcelamento'>> = [
       "avaliacao": 5.0,
       "avaliacoesCount": 135,
       "tag": "Mais Vendido",
-      "imagem": "https://fastshopbr.vteximg.com.br/arquivos/ids/5598359/0_98967c72-9214-4d94-be45-951404a5eb32.jpeg.jpg?v=639251763598270000",
+      "imagem": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-pro-2-hero-select-202409?wid=2000&hei=2000&fmt=png-alpha",
       "descricao": "Apple AirPods Pro 3 com Cancelamento Ativo de Ruído até 2x mais potente e Estojo de Recarga MagSafe (USB-C). Acompanha ponteiras de silicone em múltiplos tamanhos (PP, P, M, G), Controle por Toque na haste para ajuste de volume, Detecção de Conversa, recursos avançados de Saúde Auditiva e certificação IP54. | Pagamento: 100% no PIX ou Dinheiro (sem fiado). Aviso Apple RR-MOBILE: Alguns produtos Apple podem constar com data de compra prévia no sistema, o que não significa que o aparelho foi ativado. Para atualizar a data de ativação no site oficial, basta apresentar a nota fiscal entrando em contato pelo 0800 761 0880 (Apple Suporte). Confira o aparelho no ato da retirada — não aceitamos devolução após retirada da loja.",
       "estoque": 10
   },
