@@ -129,36 +129,36 @@ export default function Dashboard({ user, onLogout }: { user: User; onLogout: ()
 
   return (
     <div className="min-h-dvh flex flex-col">
-      <header className="sticky top-0 z-30 bg-neutral-950/90 backdrop-blur border-b border-neutral-800">
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 h-14 flex items-center justify-between gap-2">
+      <header className="sticky top-0 z-30 bg-neutral-950/95 backdrop-blur border-b border-neutral-800">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 h-13 sm:h-14 flex items-center justify-between gap-2">
           <div className="min-w-0">
-            <p className="text-sm font-bold leading-tight">RR Store — Painel</p>
-            <p className="text-[11px] text-neutral-500 truncate">{user.email}</p>
+            <p className="text-xs sm:text-sm font-bold leading-tight truncate">RR Store — Painel Admin</p>
+            <p className="text-[10px] sm:text-[11px] text-neutral-500 truncate">{user.email}</p>
           </div>
-          <div className="flex items-center gap-2">
-            <button onClick={refresh} className={btnGhost} aria-label="Recarregar" title="Recarregar">
-              <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <button onClick={refresh} className={`${btnGhost} !px-2.5 !py-2`} aria-label="Recarregar" title="Recarregar">
+              <RefreshCw size={15} className={loading ? 'animate-spin' : ''} />
             </button>
-            <a href={SITE_URL} target="_blank" rel="noreferrer" className={btnGhost}>
-              <ExternalLink size={16} /> <span className="hidden sm:inline">Ver loja</span>
+            <a href={SITE_URL} target="_blank" rel="noreferrer" className={`${btnGhost} !px-2.5 !py-2 text-xs sm:text-sm`}>
+              <ExternalLink size={15} /> <span className="hidden xs:inline">Loja</span>
             </a>
-            <button onClick={onLogout} className={btnGhost} aria-label="Sair" title="Sair">
-              <LogOut size={16} />
+            <button onClick={onLogout} className={`${btnGhost} !px-2.5 !py-2`} aria-label="Sair" title="Sair">
+              <LogOut size={15} />
             </button>
           </div>
         </div>
-        <nav className="max-w-6xl mx-auto px-3 sm:px-6 flex gap-1 overflow-x-auto pb-2">
+        <nav className="max-w-6xl mx-auto px-3 sm:px-6 grid grid-cols-4 sm:flex gap-1 pb-2">
           {TABS.map((t) => (
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-sm transition ${
+              className={`flex items-center justify-center sm:justify-start gap-1.5 whitespace-nowrap rounded-lg px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium transition ${
                 tab === t.id
                   ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
                   : 'text-neutral-400 border border-transparent hover:text-white'
               }`}
             >
-              {t.icon} {t.label}
+              {t.icon} <span className="truncate">{t.label}</span>
             </button>
           ))}
         </nav>

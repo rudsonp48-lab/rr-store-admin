@@ -35,11 +35,11 @@ export default function ImageField({ value, onChange, folder, aspect = 'aspect-s
   return (
     <div className="space-y-2">
       <div
-        className={`relative w-full ${aspect} rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 flex items-center justify-center`}
+        className={`relative w-full ${aspect} max-h-40 sm:max-h-56 rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 flex items-center justify-center`}
       >
         {value ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={value} alt="Pré-visualização" className="w-full h-full object-cover" />
+          <img src={value} alt="Pré-visualização" className="w-full h-full object-contain p-1.5" />
         ) : (
           <span className="text-xs text-neutral-500">Sem imagem</span>
         )}
@@ -56,15 +56,15 @@ export default function ImageField({ value, onChange, folder, aspect = 'aspect-s
           placeholder="Cole a URL da imagem…"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={inputCls}
+          className={`${inputCls} min-w-0 flex-1`}
         />
         <button
           type="button"
           disabled={uploading}
           onClick={() => inputRef.current?.click()}
-          className={`${btnGhost} shrink-0`}
+          className={`${btnGhost} shrink-0 !px-3`}
         >
-          <ImagePlus size={16} /> <span className="hidden sm:inline">Enviar foto</span>
+          <ImagePlus size={16} /> <span className="text-xs sm:text-sm">Foto</span>
         </button>
         <input
           ref={inputRef}

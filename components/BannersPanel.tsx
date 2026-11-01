@@ -66,19 +66,19 @@ export default function BannersPanel({ banners, products, isPublished, publish }
 
   return (
     <section className="space-y-4">
-      <div className="flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+      <div className="flex flex-col sm:flex-row gap-2.5 sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-lg font-bold">Banners da vitrine ({banners.length})</h2>
+          <h2 className="text-base sm:text-lg font-bold">Banners da vitrine ({banners.length})</h2>
           <p className="text-xs text-neutral-500">
             {banners.length === 0
-              ? 'Nenhum banner publicado: a loja mostra automaticamente os primeiros produtos.'
+              ? 'Nenhum banner extra publicado: a loja mostra a coleção oficial de destaques.'
               : isPublished
                 ? 'Os banners ativos aparecem na vitrine na ordem abaixo.'
                 : ''}{' '}
             Tamanho recomendado: 1600×1100 px.
           </p>
         </div>
-        <button onClick={openNew} className={btnPrimary}>
+        <button onClick={openNew} className={`${btnPrimary} w-full sm:w-auto`}>
           <Plus size={16} /> Novo banner
         </button>
       </div>
@@ -86,13 +86,13 @@ export default function BannersPanel({ banners, products, isPublished, publish }
       <ul className="grid gap-3 sm:grid-cols-2">
         {banners.map((b, i) => (
           <li key={b.id} className="rounded-xl border border-neutral-800 bg-neutral-950 overflow-hidden">
-            <div className="relative aspect-[16/9] bg-neutral-900">
+            <div className="relative aspect-[16/9] max-h-40 sm:max-h-52 w-full bg-neutral-900 flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={b.imagem}
                 alt={b.titulo || 'Banner'}
                 loading="lazy"
-                className={`w-full h-full object-cover ${b.ativo ? '' : 'opacity-40 grayscale'}`}
+                className={`w-full h-full object-contain p-2 ${b.ativo ? '' : 'opacity-40 grayscale'}`}
               />
               <span className="absolute top-2 left-2 text-[11px] px-2 py-0.5 rounded-full bg-black/70 border border-neutral-700">
                 #{i + 1} {b.ativo ? '· Ativo' : '· Inativo'}
