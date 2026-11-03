@@ -129,25 +129,35 @@ function mapCategory(name: string, cats: string[]): Exclude<CategoryId, 'Todos'>
   return 'Eletrônicos & Smartphones';
 }
 
-export async function GET() {
-  try {
-    const pages = [1, 2, 3];
-    const responses = await Promise.all(
-      pages.map((page) =>
-        fetch(
-          `https://gsmdigitalacessorios.com.br/wp-json/wc/store/v1/products?per_page=100&page=${page}`,
-          {
-            cache: 'no-store',
-            headers: {
-              Accept: 'application/json',
-              'User-Agent': 'RRStore-Admin-Sync/1.0',
-            },
-          }
-        ).then((r) => (r.ok ? (r.json() as Promise<WooProduct[]>) : []))
+export const maxDuration = 60;
+
+const GSM_BASE = 'https://gsmdigitalacessorios.com.br/wp-json/wc/store/v1/products';
+
+/** Lê TODAS as páginas do catálogo da GSM (antes só lia 300 produtos). */
+async function fetchAllGsm(): Promise<WooProduct[]> {
+  const headers = { Accept: 'application/json', 'User-Agent': 'RRStore-Admin-Sync/1.0' };
+  const first = await fetch(`${GSM_BASE}?per_page=100&page=1`, { cache: 'no-store', headers });
+  if (!first.ok) return [];
+  const totalPages = Math.min(Number(first.headers.get('x-wp-totalpages') || 1), 60);
+  const all: WooProduct[] = [...((await first.json()) as WooProduct[])];
+  const rest = Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => i + 2);
+  const CONCURRENCY = 6;
+  for (let i = 0; i < rest.length; i += CONCURRENCY) {
+    const results = await Promise.all(
+      rest.slice(i, i + CONCURRENCY).map((page) =>
+        fetch(`${GSM_BASE}?per_page=100&page=${page}`, { cache: 'no-store', headers })
+          .then((r) => (r.ok ? (r.json() as Promise<WooProduct[]>) : []))
+          .catch(() => [] as WooProduct[])
       )
     );
+    results.forEach((r) => all.push(...r));
+  }
+  return all;
+}
 
-    const rawItems = responses.flat();
+export async function GET() {
+  try {
+    const rawItems = await fetchAllGsm();
     const seen = new Set<string>();
     const syncedProducts: Product[] = [];
 

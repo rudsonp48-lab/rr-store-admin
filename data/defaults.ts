@@ -5,7 +5,7 @@ export const WHATSAPP_NUMBER_SECONDARY = '5561985964112';
 export const STORE_ADDRESS = 'Feira dos Importados do SIA — Conjunto D, Loja D439 • SIA Trecho 7, Brasília - DF';
 
 export function calculatePixPrice(precoPor: number): number {
-  return Number((precoPor * 0.95).toFixed(2));
+  return Number(precoPor.toFixed(2));
 }
 
 export function formatBRL(value: number): string {
@@ -16,8 +16,7 @@ export function formatBRL(value: number): string {
 }
 
 export function formatInstallment(precoPor: number, parcelas: number): string {
-  const valorParcela = precoPor / parcelas;
-  return `ou ${parcelas}x de ${formatBRL(valorParcela)} sem juros`;
+  return `ou em até ${parcelas}x no cartão (juros conforme taxa da operadora)`;
 }
 
 export const CATEGORIES: CategoryInfo[] = [
