@@ -109,7 +109,7 @@ export function friendlyError(err: unknown): string {
   const code = (err as { code?: string })?.code || '';
   const message = err instanceof Error ? err.message : String(err);
   if (code === 'permission-denied' || code === 'storage/unauthorized') {
-    return 'Sem permissão. Confirme que você está logado com o e-mail autorizado e que as regras (firestore.rules / storage.rules) foram publicadas no Firebase.';
+    return 'Sem permissão no Firestore. Acesse o Firebase Console (Firestore > Regras) e publique a regra liberando a coleção "rr_store_settings".';
   }
   if (code === 'unavailable' || code === 'storage/retry-limit-exceeded') {
     return 'Sem conexão com o Firebase. Verifique sua internet e tente novamente.';
