@@ -34,3 +34,175 @@ textarea {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================================================
+   GEOMETRIC LOADING WAVE (Platform Loader)
+   ============================================================================ */
+
+#loadingWave {
+  display: flex;
+  gap: 16px;
+  perspective: 80px;
+  transform-style: preserve-3d;
+}
+
+.shape {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  display: inline-block;
+  animation: shapeWave 2.4s ease infinite;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.square {
+  background: #ff0080;
+  border-radius: 4px;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 28px solid #ff0080;
+  background: transparent;
+  animation: triangleWave 2.4s ease infinite;
+}
+
+.diamond {
+  background: #ff0080;
+  transform: rotate(45deg);
+  width: 24px;
+  height: 24px;
+  margin: 4px;
+}
+
+.circle {
+  background: #ff0080;
+  border-radius: 50%;
+}
+
+.shape:nth-child(1) { animation-delay: 0s; }
+.shape:nth-child(2) { animation-delay: 0.1s; }
+.shape:nth-child(3) { animation-delay: 0.2s; }
+.shape:nth-child(4) { animation-delay: 0.3s; }
+.shape:nth-child(5) { animation-delay: 0.4s; }
+.shape:nth-child(6) { animation-delay: 0.5s; }
+.shape:nth-child(7) { animation-delay: 0.6s; }
+.shape:nth-child(8) { animation-delay: 0.7s; }
+
+@keyframes shapeWave {
+  0% {
+    transform: translate3D(0,0,0) scale(1) rotateY(0);
+    background-color: #ff0080;
+    box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+  }
+  12% {
+    transform: translate3D(4px,-8px,4px) scale(1.3) rotateY(15deg);
+    background-color: #ff4080;
+    box-shadow: 0 0 25px rgba(255, 64, 128, 0.8), 0 0 50px rgba(255, 64, 128, 0.4);
+  }
+  15% {
+    background-color: #ff8040;
+    box-shadow: 0 0 30px rgba(255, 128, 64, 0.9), 0 0 60px rgba(255, 128, 64, 0.5);
+  }
+  24% {
+    transform: translate3D(0,0,0) scale(1) rotateY(0);
+    background-color: #ffff00;
+    box-shadow: 0 0 25px rgba(255, 255, 0, 0.7), 0 0 50px rgba(255, 255, 0, 0.3);
+  }
+  36% {
+    background-color: #80ff40;
+    box-shadow: 0 0 20px rgba(128, 255, 64, 0.6), 0 0 40px rgba(128, 255, 64, 0.2);
+  }
+  48% {
+    background-color: #40ff80;
+    box-shadow: 0 0 18px rgba(64, 255, 128, 0.5), 0 0 35px rgba(64, 255, 128, 0.2);
+  }
+  60% {
+    background-color: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 0 30px rgba(0, 255, 255, 0.2);
+  }
+  72% {
+    background-color: #4080ff;
+    box-shadow: 0 0 12px rgba(64, 128, 255, 0.3), 0 0 25px rgba(64, 128, 255, 0.15);
+  }
+  84% {
+    background-color: #8040ff;
+    box-shadow: 0 0 10px rgba(128, 64, 255, 0.25), 0 0 20px rgba(128, 64, 255, 0.1);
+  }
+  100% {
+    transform: scale(1);
+    background-color: #ff0080;
+    box-shadow: 0 0 8px rgba(255, 0, 128, 0.2);
+  }
+}
+
+@keyframes triangleWave {
+  0% {
+    transform: translate3D(0,0,0) scale(1) rotateY(0);
+    border-bottom-color: #ff0080;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 128, 0.3));
+  }
+  12% {
+    transform: translate3D(4px,-8px,4px) scale(1.3) rotateY(15deg);
+    border-bottom-color: #ff4080;
+    filter: drop-shadow(0 0 25px rgba(255, 64, 128, 0.8));
+  }
+  15% {
+    border-bottom-color: #ff8040;
+    filter: drop-shadow(0 0 30px rgba(255, 128, 64, 0.9));
+  }
+  24% {
+    transform: translate3D(0,0,0) scale(1) rotateY(0);
+    border-bottom-color: #ffff00;
+    filter: drop-shadow(0 0 25px rgba(255, 255, 0, 0.7));
+  }
+  36% {
+    border-bottom-color: #80ff40;
+    filter: drop-shadow(0 0 20px rgba(128, 255, 64, 0.6));
+  }
+  48% {
+    border-bottom-color: #40ff80;
+    filter: drop-shadow(0 0 18px rgba(64, 255, 128, 0.5));
+  }
+  60% {
+    border-bottom-color: #00ffff;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4));
+  }
+  72% {
+    border-bottom-color: #4080ff;
+    filter: drop-shadow(0 0 12px rgba(64, 128, 255, 0.3));
+  }
+  84% {
+    border-bottom-color: #8040ff;
+    filter: drop-shadow(0 0 10px rgba(128, 64, 255, 0.25));
+  }
+  100% {
+    transform: scale(1);
+    border-bottom-color: #ff0080;
+    filter: drop-shadow(0 0 8px rgba(255, 0, 128, 0.2));
+  }
+}
+
+@media (max-width: 768px) {
+  .shape {
+    width: 24px;
+    height: 24px;
+  }
+  .triangle {
+    border-left-width: 12px;
+    border-right-width: 12px;
+    border-bottom-width: 21px;
+  }
+  .diamond {
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+  }
+  #loadingWave {
+    gap: 12px;
+  }
+}
