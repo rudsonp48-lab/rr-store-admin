@@ -1,0 +1,702 @@
+'use client';
+
+import React, { useMemo, useState } from 'react';
+import {
+  AlertCircle,
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  FileText,
+  RotateCcw,
+  Search,
+  Sparkles,
+  TrendingDown,
+  TrendingUp,
+  X,
+} from 'lucide-react';
+import { Product } from '../types/store';
+import {
+  matchAppleItems,
+  parseAppleWhatsAppList,
+  ParsedAppleItem,
+} from '../lib/apple-price-parser';
+import { formatBRL, formatInstallment } from '../data/defaults';
+import { btnGhost, btnPrimary, inputCls } from './ui';
+
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+  products: Product[];
+  publish: (next: Product[], okMsg?: string) => Promise<boolean>;
+}
+
+export const INITIAL_APPLE_LIST_SAMPLE = `*🩵*Numero RR-MOBILE: RR MOBILE: Provérbios 3:5-6: "Confia no Senhor de todo o teu coração, e não te animes no teu próprio entendimento. Reconhece-o em todos os teus caminhos, e ele te endireitará.*
+ Terca-Feira  Chama Minha Joia 💍03/11/26*📢
+
+Verifique até o final
+
+
+📱 iPhone 17  pro max 512 (americano 🇺🇸)💯 prazo, no pix sem fiado 
+
+🤍Silver: 8.750
+
+ 📱 iPhone 17  pro max 256gb 💯 prazo, no pix sem fiado 
+
+🧡Laranja: 7.150 🇺🇸
+
+📱 iPhone 18  pro 256gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
+
+💜 Bordô: 7.750
+
+
+📱 iPhone 18  pro max 256gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
+
+💜 Bordô: 9.000
+💙 Azul: 9.150
+
+📱 iPhone 18  pro  512gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
+
+🩷 Bordo: 9.850
+
+📱 iPhone 18  pro  Max 512gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
+
+🩷 Bordo: 10.900
+
+⌚️Apple watch S11 42 mm
+
+🩷Rose Gold: 2.300
+🤍Silver: 2.300
+🩶Gray: 2.300
+
+⌚️Apple watch S12 42 mm
+
+🖤 Preto: 2.950
+🩶 Gray: 2.950
+
+⌚️Apple watch S12 46 mm
+
+🖤  Preto: 3.150
+
+⌚️Apple watch SE 3 40mm
+
+🖤Preto: 1.650
+
+⌚️Apple watch SE 3 44mm
+
+🖤Midnight: 1.999
+⌚️Apple watch SE 2 44mm
+
+🖤Midnight: 1.550
+
+⌚️Apple watch Ultra 3 49mm Black
+
+🖤pulseira tecido: 4.650
+
+⌚️Apple watch Ultra 3 49mm Natural
+
+💛Pulseira tecido azul: 4.650
+
+—————————————
+—————————————
+
+💍JOIAS APLLE
+
+💎 MacBook Neo 8gb  256gb T13
+
+💚Citrus: zerou no estoque 
+
+💎 MacBook Neo 8gb  512gb T13
+
+🤍Silver: 5.750
+
+💎 MacBook Air M5 16gb  512gb T13
+
+🖤 Midinight: 8.150
+
+
+——————————————
+
+——————————————————————————
+
+💍JOIAS APLLE
+
+💎 Magic Keyboard 11” Ipad pro M5
+
+🖤 Space gray: 2650
+
+💎 Magic Keyboard 13” Ipad pro M5
+
+🖤 Preta: 2.950
+
+💎 Magic Keyboard 11" Ipad Air M3/M4 
+
+🖤 Preta: 2.650
+
+💎 iPad Pro M5 T13  256gb WIFI
+
+🖤Preto: 8.850
+🤍Branco: 8.850
+
+💎 iPad Pro M5 T11  256gb 
+
+⚫ space black: 7.850
+
+💎 iPad Pro M5 T11  512gb 
+
+⚫ space black: 8.750
+
+💎 iPad Air M4 T11 128gb
+
+💙Azul: 4.850
+
+💎 iPad Air M4 T13 128gb
+
+zerou no estoque 
+
+💎 iPad 11 128gb sem menos 
+
+💙Azul: 2.850
+🤍Silver: 2.850
+
+💎 iPad mini 7 (A17PRO) 128gb
+
+🩶SpaceGray: zerou no estoque 
+
+——————————————————————————
+
+💍 JOIAS APLLE  ACESSORIOS
+
+🖱️ Magic Mouse 3 USB-C
+
+🤍 Branco: 700
+🖤Preto: 800
+
+🖋️ Apple Pencil 1 USB-C
+
+🤍 650
+
+🖋️ Apple Pencil pro
+
+▫️799
+
+
+🖱️ Teclado Numérico with Touch ID
+
+🤍Branco: 1.650
+🖤 Preto: 1750
+
+
+🖱️ Teclado with Touch ID
+
+🤍zerou
+
+🖱️ Magic Trackpad 
+
+🤍 Branco : 999
+
+🎧 AirPods Max 2 (CHIP H2)
+
+💜Roxo: 3.499
+
+🎧 AirPods 4 C/ cancelamento
+
+▫️1.280
+
+🎧 AirPods 4 Regular
+
+▫️830
+
+🎧 AirPods 5 C/ cancelamento
+
+▫️1.450
+
+🎧 AirPods 5 Regular
+
+▫️1.280
+
+🎧 AirPods pro 3
+
+▫️1.450
+
+🎧 AirTag Pack 4 modelo 1
+
+▫️630
+
+🎧 AirTag Pack 4 modelo 2
+
+▫️780
+
+🎧AirTag 2 unidade
+
+▫️250 
+
+💎 Fonte p/ Macbook USB-C 97W ( 1 ano de garantia)
+
+■ 199
+
+💎 Fonte Original USB-C 35w
+
+■ 150
+
+💎 Fonte Original USB-C 20w
+
+▫️75.00 
+
+💎 Cabo Original Lighting 1m
+
+▫️zerou no estoque
+
+💎 Cabo Original USB-C 1m
+
+Zerou
+
+💎 Cabo Original Lighting 2m
+
+▫️100.00
+
+💎 Cabo Original USB-C 240W 2m
+
+▫️130
+
+💎 Cabo USB-C Original Retirado
+
+▫️100
+
+💎 Magsafe Charger USB-C Original4 (carregador indução)
+
+■150
+
+💎 Cabo watch Original 
+
+■185`;
+
+type FilterTab = 'todos' | 'alterados' | 'zerados' | 'sem_match';
+
+export default function ApplePriceUpdaterModal({
+  isOpen,
+  onClose,
+  products,
+  publish,
+}: Props) {
+  const [listText, setListText] = useState(INITIAL_APPLE_LIST_SAMPLE);
+  const [analyzed, setAnalyzed] = useState(false);
+  const [items, setItems] = useState<ParsedAppleItem[]>([]);
+  const [filterTab, setFilterTab] = useState<FilterTab>('todos');
+  const [search, setSearch] = useState('');
+  const [zeroOutStock, setZeroOutStock] = useState(true);
+  const [isPublishing, setIsPublishing] = useState(false);
+
+  const productMap = useMemo(() => {
+    return new Map<string, Product>(products.map((p) => [p.id, p]));
+  }, [products]);
+
+  const handleAnalyze = () => {
+    if (!listText.trim()) return;
+    const parsed = parseAppleWhatsAppList(listText);
+    const matched = matchAppleItems(parsed, products);
+    setItems(matched);
+    setAnalyzed(true);
+  };
+
+  const handleToggleSelect = (index: number) => {
+    setItems((prev) =>
+      prev.map((it, i) => (i === index ? { ...it, selected: !it.selected } : it))
+    );
+  };
+
+  const handleSelectAll = (select: boolean) => {
+    setItems((prev) => prev.map((it) => ({ ...it, selected: select })));
+  };
+
+  const stats = useMemo(() => {
+    const total = items.length;
+    const matched = items.filter((i) => !!i.matchedProductId).length;
+    const zerados = items.filter((i) => i.isZerou).length;
+    const changed = items.filter(
+      (i) => !!i.matchedProductId && !i.isZerou && (i.priceDiff ?? 0) !== 0
+    ).length;
+    const noMatch = total - matched;
+    const selectedCount = items.filter((i) => i.selected && !!i.matchedProductId).length;
+    return { total, matched, zerados, changed, noMatch, selectedCount };
+  }, [items]);
+
+  const filteredItems = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return items
+      .map((it, originalIdx) => ({ it, originalIdx }))
+      .filter(({ it }) => {
+        if (filterTab === 'alterados' && ((it.priceDiff ?? 0) === 0 || it.isZerou || !it.matchedProductId)) {
+          return false;
+        }
+        if (filterTab === 'zerados' && !it.isZerou) return false;
+        if (filterTab === 'sem_match' && it.matchedProductId) return false;
+
+        if (q) {
+          const matchName = it.matchedProductName?.toLowerCase() || '';
+          const headerName = it.header.toLowerCase();
+          const colorName = it.color.toLowerCase();
+          return matchName.includes(q) || headerName.includes(q) || colorName.includes(q);
+        }
+        return true;
+      });
+  }, [items, filterTab, search]);
+
+  const handleApplyUpdates = async () => {
+    const selectedItems = items.filter((i) => i.selected && i.matchedProductId);
+    if (selectedItems.length === 0) {
+      alert('Nenhum item selecionado para atualizar.');
+      return;
+    }
+
+    setIsPublishing(true);
+    try {
+      // Cria uma cópia do catálogo com os preços atualizados
+      const updatedCatalog = products.map((prod) => {
+        const itemUpdate = selectedItems.find((it) => it.matchedProductId === prod.id);
+        if (!itemUpdate) return prod;
+
+        if (itemUpdate.isZerou && zeroOutStock) {
+          return {
+            ...prod,
+            estoque: 0,
+            descricao: prod.descricao.includes('(Zerou no Estoque)')
+              ? prod.descricao
+              : `${prod.descricao} (Aguardando reposição de lote)`,
+          };
+        }
+
+        if (!itemUpdate.isZerou && itemUpdate.price > 0) {
+          const precoIntegral = itemUpdate.price;
+          const parcelas = precoIntegral >= 200 ? 12 : precoIntegral >= 80 ? 6 : 3;
+          return {
+            ...prod,
+            precoCusto: precoIntegral,
+            precoDe: Math.round(precoIntegral * 1.15),
+            precoPor: precoIntegral,
+            precoPix: precoIntegral, // Regra integral de atacado sem desconto no PIX
+            maxParcelasSemJuros: parcelas,
+            parcelamento: formatInstallment(precoIntegral, parcelas),
+            estoque: prod.estoque === 0 ? 5 : prod.estoque,
+          };
+        }
+
+        return prod;
+      });
+
+      const ok = await publish(
+        updatedCatalog,
+        `Sucesso! ${selectedItems.length} produtos Apple atualizados com a lista do WhatsApp.`
+      );
+
+      if (ok) {
+        onClose();
+      }
+    } catch (err) {
+      alert('Erro ao atualizar preços Apple: ' + (err instanceof Error ? err.message : String(err)));
+    } finally {
+      setIsPublishing(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-5 bg-black/85 backdrop-blur-md overflow-y-auto">
+      <div className="w-full max-w-5xl max-h-[92vh] flex flex-col rounded-2xl sm:rounded-3xl border border-neutral-800 bg-neutral-950 shadow-2xl overflow-hidden">
+        {/* Header */}
+        <div className="p-3.5 sm:p-5 border-b border-neutral-800 bg-gradient-to-r from-neutral-900 via-neutral-950 to-neutral-900 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0">
+              <Sparkles size={20} className="text-emerald-400" />
+            </div>
+            <div className="min-w-0">
+              <h2 className="text-sm sm:text-base font-bold text-white flex items-center gap-2 truncate">
+                Atualizar Preços Apple (Lista WhatsApp)
+              </h2>
+              <p className="text-[11px] sm:text-xs text-neutral-400 truncate">
+                Preços de atacado integrais da RR Mobile aplicados diretamente na vitrine.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-2 rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-900 transition shrink-0"
+            aria-label="Fechar"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-3.5 sm:p-6 space-y-4">
+          {!analyzed ? (
+            <div className="space-y-3.5">
+              <div className="rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-3 sm:p-3.5 text-xs text-emerald-300 flex items-start gap-2.5">
+                <FileText size={16} className="text-emerald-400 shrink-0 mt-0.5" />
+                <p>
+                  Cole abaixo a lista completa recebida no WhatsApp da <strong>RR Mobile</strong>. O
+                  sistema reconhece automaticamente iPhones, Apple Watches, MacBooks, iPads,
+                  AirPods, AirTags e Acessórios, atualiza os preços e marca os itens esgotados
+                  (zerou no estoque).
+                </p>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs font-semibold text-neutral-300">
+                    Mensagem copiada do WhatsApp:
+                  </label>
+                  <button
+                    onClick={() => setListText(INITIAL_APPLE_LIST_SAMPLE)}
+                    className="text-[11px] text-emerald-400 hover:underline flex items-center gap-1"
+                  >
+                    <RotateCcw size={12} /> Carregar Lista de Hoje (03/11)
+                  </button>
+                </div>
+                <textarea
+                  value={listText}
+                  onChange={(e) => setListText(e.target.value)}
+                  placeholder="Cole aqui a mensagem do WhatsApp da RR-Mobile..."
+                  rows={14}
+                  className={`${inputCls} font-mono text-xs leading-relaxed`}
+                />
+              </div>
+
+              <div className="flex justify-end gap-2 pt-2">
+                <button onClick={onClose} className={btnGhost}>
+                  Cancelar
+                </button>
+                <button onClick={handleAnalyze} className={btnPrimary}>
+                  <Search size={16} /> Analisar Lista e Comparar Preços
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {/* Summary Badges */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div className="rounded-xl border border-neutral-800 bg-neutral-900/60 p-2.5">
+                  <span className="text-[10px] text-neutral-400 uppercase font-semibold">Itens Lidos</span>
+                  <p className="text-base sm:text-lg font-bold text-white mt-0.5">{stats.total}</p>
+                  <span className="text-[10px] text-emerald-400 font-medium">
+                    {stats.matched} encontrados na loja
+                  </span>
+                </div>
+                <div className="rounded-xl border border-blue-500/20 bg-blue-950/20 p-2.5">
+                  <span className="text-[10px] text-blue-300 uppercase font-semibold">Com Mudança</span>
+                  <p className="text-base sm:text-lg font-bold text-blue-400 mt-0.5">{stats.changed}</p>
+                  <span className="text-[10px] text-neutral-400">Novo valor detectado</span>
+                </div>
+                <div className="rounded-xl border border-red-500/20 bg-red-950/20 p-2.5">
+                  <span className="text-[10px] text-red-300 uppercase font-semibold">Zerados no Estoque</span>
+                  <p className="text-base sm:text-lg font-bold text-red-400 mt-0.5">{stats.zerados}</p>
+                  <span className="text-[10px] text-neutral-400">Estoque será zerado</span>
+                </div>
+                <div className="rounded-xl border border-amber-500/20 bg-amber-950/20 p-2.5">
+                  <span className="text-[10px] text-amber-300 uppercase font-semibold">Sem Correspondência</span>
+                  <p className="text-base sm:text-lg font-bold text-amber-400 mt-0.5">{stats.noMatch}</p>
+                  <span className="text-[10px] text-neutral-400">Não cadastrados</span>
+                </div>
+              </div>
+
+              {/* Filters & Options */}
+              <div className="flex flex-col sm:flex-row gap-2.5 sm:items-center justify-between">
+                <div className="flex flex-wrap gap-1.5">
+                  <button
+                    onClick={() => setFilterTab('todos')}
+                    className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
+                      filterTab === 'todos'
+                        ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                        : 'text-neutral-400 hover:text-white bg-neutral-900'
+                    }`}
+                  >
+                    Todos ({items.length})
+                  </button>
+                  <button
+                    onClick={() => setFilterTab('alterados')}
+                    className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
+                      filterTab === 'alterados'
+                        ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+                        : 'text-neutral-400 hover:text-white bg-neutral-900'
+                    }`}
+                  >
+                    Com alteração ({stats.changed})
+                  </button>
+                  <button
+                    onClick={() => setFilterTab('zerados')}
+                    className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
+                      filterTab === 'zerados'
+                        ? 'bg-red-500/20 text-red-300 border border-red-500/30'
+                        : 'text-neutral-400 hover:text-white bg-neutral-900'
+                    }`}
+                  >
+                    Zerados ({stats.zerados})
+                  </button>
+                  <button
+                    onClick={() => setFilterTab('sem_match')}
+                    className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
+                      filterTab === 'sem_match'
+                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                        : 'text-neutral-400 hover:text-white bg-neutral-900'
+                    }`}
+                  >
+                    Sem match ({stats.noMatch})
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <div className="relative flex-1 sm:w-48">
+                    <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-500" />
+                    <input
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      placeholder="Filtrar..."
+                      className={`${inputCls} !py-1.5 !pl-8 text-xs`}
+                    />
+                  </div>
+                  <button
+                    onClick={() => handleSelectAll(true)}
+                    className="text-[11px] text-neutral-400 hover:text-white px-2 py-1 rounded bg-neutral-900"
+                  >
+                    Marcar todos
+                  </button>
+                </div>
+              </div>
+
+              {/* Toggle Option */}
+              <label className="flex items-center gap-2 text-xs text-neutral-300 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={zeroOutStock}
+                  onChange={(e) => setZeroOutStock(e.target.checked)}
+                  className="rounded border-neutral-700 bg-neutral-900 text-emerald-500 focus:ring-0"
+                />
+                <span>Zerar estoque dos produtos marcados como <strong>zerou no estoque</strong> na lista</span>
+              </label>
+
+              {/* Items List */}
+              <div className="border border-neutral-800 rounded-xl divide-y divide-neutral-800/60 max-h-[46vh] overflow-y-auto bg-neutral-900/30">
+                {filteredItems.length === 0 ? (
+                  <div className="p-6 text-center text-xs text-neutral-500">
+                    Nenhum item corresponde ao filtro atual.
+                  </div>
+                ) : (
+                  filteredItems.map(({ it, originalIdx }) => {
+                    const matchedProd = it.matchedProductId ? productMap.get(it.matchedProductId) : null;
+                    const diff = it.priceDiff ?? 0;
+
+                    return (
+                      <div
+                        key={originalIdx}
+                        className={`p-2.5 sm:p-3 flex items-center justify-between gap-3 text-xs transition ${
+                          it.selected ? 'bg-neutral-900/50' : 'opacity-60 bg-transparent'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                          {it.matchedProductId ? (
+                            <input
+                              type="checkbox"
+                              checked={it.selected}
+                              onChange={() => handleToggleSelect(originalIdx)}
+                              className="rounded border-neutral-700 bg-neutral-800 text-emerald-500 focus:ring-0 shrink-0"
+                            />
+                          ) : (
+                            <AlertCircle size={15} className="text-amber-400 shrink-0" />
+                          )}
+
+                          {matchedProd?.imagem && (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={matchedProd.imagem}
+                              alt=""
+                              className="w-8 h-8 rounded-lg object-contain bg-neutral-950 border border-neutral-800 shrink-0"
+                            />
+                          )}
+
+                          <div className="min-w-0 flex-1">
+                            {it.matchedProductId ? (
+                              <p className="font-semibold text-white truncate">
+                                {matchedProd?.nome || it.matchedProductName}
+                              </p>
+                            ) : (
+                              <p className="font-semibold text-amber-300 truncate">
+                                {it.header} ({it.color})
+                              </p>
+                            )}
+                            <p className="text-[11px] text-neutral-400 truncate">
+                              Linha lida: <span className="font-mono text-neutral-300">{it.rawLine}</span>
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Price / Stock Column */}
+                        <div className="text-right shrink-0">
+                          {it.isZerou ? (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-950 border border-red-800 text-red-300">
+                              ZEROU ESTOQUE
+                            </span>
+                          ) : it.matchedProductId ? (
+                            <div>
+                              <div className="flex items-center justify-end gap-1.5">
+                                <span className="text-[11px] text-neutral-500 line-through">
+                                  {formatBRL(it.currentPrice ?? 0)}
+                                </span>
+                                <ArrowRight size={11} className="text-neutral-500" />
+                                <span className="font-bold text-emerald-400 text-xs sm:text-sm">
+                                  {formatBRL(it.price)}
+                                </span>
+                              </div>
+                              {diff !== 0 && (
+                                <span
+                                  className={`text-[10px] font-semibold flex items-center justify-end gap-0.5 ${
+                                    diff < 0 ? 'text-emerald-400' : 'text-blue-400'
+                                  }`}
+                                >
+                                  {diff < 0 ? <TrendingDown size={10} /> : <TrendingUp size={10} />}
+                                  {diff < 0 ? '' : '+'}
+                                  {formatBRL(diff)}
+                                </span>
+                              )}
+                            </div>
+                          ) : (
+                            <span className="text-neutral-300 font-bold">{formatBRL(it.price)}</span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 pt-2 border-t border-neutral-800">
+                <button
+                  onClick={() => setAnalyzed(false)}
+                  className={`${btnGhost} w-full sm:w-auto text-xs`}
+                >
+                  <RotateCcw size={14} /> Editar texto da lista
+                </button>
+
+                <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                  <button onClick={onClose} className={`${btnGhost} text-xs`}>
+                    Cancelar
+                  </button>
+                  <button
+                    onClick={handleApplyUpdates}
+                    disabled={isPublishing || stats.selectedCount === 0}
+                    className={`${btnPrimary} text-xs sm:text-sm`}
+                  >
+                    <Check size={16} />
+                    {isPublishing
+                      ? 'Publicando na Loja…'
+                      : `Publicar ${stats.selectedCount} Preços Apple Agora`}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

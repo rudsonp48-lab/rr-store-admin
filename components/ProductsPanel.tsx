@@ -12,6 +12,7 @@ import {
   formatInstallment,
 } from '../data/defaults';
 import ImageField from './ImageField';
+import ApplePriceUpdaterModal from './ApplePriceUpdaterModal';
 import { btnDanger, btnGhost, btnPrimary, Field, inputCls } from './ui';
 
 const TAGS: Product['tag'][] = [
@@ -111,6 +112,7 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
   const [syncingSupplier, setSyncingSupplier] = useState(false);
+  const [appleModalOpen, setAppleModalOpen] = useState(false);
 
   const enrichedProducts = useMemo(
     () => products.map(enrichProductWithWholesale),
@@ -266,6 +268,14 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
           </p>
         </div>
         <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+          <button
+            onClick={() => setAppleModalOpen(true)}
+            className={`${btnGhost} !px-2.5 !py-2 text-xs sm:text-sm border-emerald-500/30 bg-emerald-950/20 hover:bg-emerald-950/40 text-emerald-300`}
+            title="Atualizar preços de iPhones, Apple Watch, MacBooks, iPads e Acessórios via lista do WhatsApp"
+          >
+            <Sparkles size={15} className="text-emerald-400 shrink-0" />
+            <span className="truncate">Lista Apple (WhatsApp)</span>
+          </button>
           <button
             onClick={syncSupplierNow}
             disabled={syncingSupplier}
@@ -592,6 +602,13 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
           </form>
         </div>
       )}
+
+      <ApplePriceUpdaterModal
+        isOpen={appleModalOpen}
+        onClose={() => setAppleModalOpen(false)}
+        products={enrichedProducts}
+        publish={publish}
+      />
     </section>
   );
 }
