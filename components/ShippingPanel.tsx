@@ -42,35 +42,42 @@ export default function ShippingPanel({ regions, isPublished, publish }: Props) 
 
   return (
     <section className="space-y-4">
-      <div className="flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+      <div className="flex flex-col sm:flex-row gap-2.5 sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-lg font-bold">Fretes por localidade ({list.length})</h2>
+          <h2 className="text-base sm:text-lg font-bold">Fretes por localidade ({list.length})</h2>
           <p className="text-xs text-neutral-500">
             {isPublished ? 'Fretes publicados.' : 'Ainda não publicado: a loja usa as taxas padrão.'}{' '}
             Frete grátis = 0 desativa.
           </p>
         </div>
         <div className="flex gap-2">
-          <button onClick={add} className={btnGhost}>
+          <button onClick={add} className={`${btnGhost} flex-1 sm:flex-initial text-xs sm:text-sm`}>
             <Plus size={16} /> Localidade
           </button>
-          <button onClick={save} disabled={!dirty || saving} className={btnPrimary}>
+          <button onClick={save} disabled={!dirty || saving} className={`${btnPrimary} flex-1 sm:flex-initial text-xs sm:text-sm`}>
             <Save size={16} /> {saving ? 'Publicando…' : dirty ? 'Publicar alterações' : 'Publicado'}
           </button>
         </div>
       </div>
 
-      <ul className="space-y-2">
+      <ul className="space-y-2.5">
         {list.map((r) => (
           <li
             key={r.id}
-            className="grid grid-cols-2 sm:grid-cols-[1.5fr_1fr_1fr_1fr_auto] gap-2 items-end rounded-xl border border-neutral-800 bg-neutral-950 p-3"
+            className="grid grid-cols-6 sm:grid-cols-[1.5fr_1fr_1fr_1fr_auto] gap-2 items-end rounded-xl border border-neutral-800 bg-neutral-950 p-3"
           >
-            <label className="col-span-2 sm:col-span-1">
+            <label className="col-span-5 sm:col-span-1">
               <span className="block text-[11px] text-neutral-500 mb-1">Localidade</span>
               <input value={r.nome} onChange={(e) => update(r.id, { nome: e.target.value })} className={inputCls} />
             </label>
-            <label>
+            <button
+              onClick={() => setList((cur) => cur.filter((x) => x.id !== r.id))}
+              className={`${btnDanger} col-span-1 sm:hidden !px-0 h-[42px]`}
+              aria-label="Remover"
+            >
+              <Trash2 size={15} />
+            </button>
+            <label className="col-span-2 sm:col-span-1">
               <span className="block text-[11px] text-neutral-500 mb-1">Taxa (R$)</span>
               <input
                 type="number"
@@ -82,7 +89,7 @@ export default function ShippingPanel({ regions, isPublished, publish }: Props) 
                 className={inputCls}
               />
             </label>
-            <label>
+            <label className="col-span-2 sm:col-span-1">
               <span className="block text-[11px] text-neutral-500 mb-1">Prazo</span>
               <input
                 value={r.tempoEstimado}
@@ -90,8 +97,8 @@ export default function ShippingPanel({ regions, isPublished, publish }: Props) 
                 className={inputCls}
               />
             </label>
-            <label>
-              <span className="block text-[11px] text-neutral-500 mb-1">Grátis acima de (R$)</span>
+            <label className="col-span-2 sm:col-span-1">
+              <span className="block text-[11px] text-neutral-500 mb-1">Grátis acima (R$)</span>
               <input
                 type="number"
                 step="0.01"
@@ -104,7 +111,7 @@ export default function ShippingPanel({ regions, isPublished, publish }: Props) 
             </label>
             <button
               onClick={() => setList((cur) => cur.filter((x) => x.id !== r.id))}
-              className={`${btnDanger} col-span-2 sm:col-span-1`}
+              className={`${btnDanger} hidden sm:inline-flex`}
               aria-label="Remover"
             >
               <Trash2 size={14} />

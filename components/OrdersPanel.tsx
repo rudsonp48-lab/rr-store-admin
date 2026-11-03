@@ -118,7 +118,7 @@ export default function OrdersPanel({ notify }: { notify: (t: 'ok' | 'err', msg:
                   <select
                     value={o.status}
                     onChange={(e) => changeStatus(o, e.target.value)}
-                    className={`${inputCls} sm:w-64`}
+                    className={`${inputCls} w-full sm:w-64`}
                   >
                     {ORDER_STATUSES.map((s) => (
                       <option key={s.id} value={s.id}>

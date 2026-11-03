@@ -30,7 +30,7 @@ export const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
   .map((e) => e.trim().toLowerCase())
   .filter((e) => e && e !== 'seu-email@exemplo.com');
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://rrmobilestore.com.br';
 
 /** Filtro de interface. A proteção real é feita pelas regras do Firestore/Storage. */
 export function isAllowedEmail(email: string | null | undefined): boolean {

@@ -255,68 +255,69 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
   };
 
   return (
-    <section className="space-y-4">
-      <div className="flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+    <section className="space-y-3.5 sm:space-y-4">
+      <div className="flex flex-col sm:flex-row gap-2.5 sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-lg font-bold">Produtos ({enrichedProducts.length})</h2>
+          <h2 className="text-base sm:text-lg font-bold">Produtos ({enrichedProducts.length})</h2>
           <p className="text-xs text-neutral-500">
             {isPublished
               ? 'Catálogo publicado — sincronizado com fornecedor GSM Digital Acessórios.'
               : 'Sincronização automática ativa com GSM Digital Acessórios.'}
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
           <button
             onClick={syncSupplierNow}
             disabled={syncingSupplier}
-            className={btnGhost}
+            className={`${btnGhost} !px-2.5 !py-2 text-xs sm:text-sm`}
             title="Buscar novos produtos, preços de atacado e estoque direto de gsmdigitalacessorios.com.br"
           >
-            <RefreshCw size={16} className={syncingSupplier ? 'animate-spin text-emerald-400' : 'text-emerald-400'} />
-            {syncingSupplier ? 'Sincronizando GSM…' : 'Sincronizar GSM Digital'}
+            <RefreshCw size={15} className={syncingSupplier ? 'animate-spin text-emerald-400 shrink-0' : 'text-emerald-400 shrink-0'} />
+            <span className="truncate">{syncingSupplier ? 'Sincronizando…' : 'Sincronizar GSM'}</span>
           </button>
-          <button onClick={restoreDefaults} className={btnGhost}>
-            <RotateCcw size={16} /> {isPublished ? 'Restaurar padrão' : 'Publicar padrão'}
+          <button onClick={restoreDefaults} className={`${btnGhost} !px-2.5 !py-2 text-xs sm:text-sm`}>
+            <RotateCcw size={15} className="shrink-0" />
+            <span className="truncate">{isPublished ? 'Restaurar padrão' : 'Publicar padrão'}</span>
           </button>
-          <button onClick={openNew} className={btnPrimary}>
+          <button onClick={openNew} className={`${btnPrimary} col-span-2 sm:col-span-1 !py-2.5 text-xs sm:text-sm`}>
             <Plus size={16} /> Novo produto
           </button>
         </div>
       </div>
 
-      {/* Resumo de Atacado & Margem de Lucro */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-        <div className="rounded-xl border border-neutral-800 bg-neutral-950/90 p-3">
-          <span className="text-[11px] uppercase tracking-wider text-neutral-400 font-semibold">
+      {/* Resumo de Atacado & Margem de Lucro (Compacto no Celular) */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
+        <div className="col-span-2 sm:col-span-1 rounded-xl border border-neutral-800 bg-neutral-950/90 p-2.5 sm:p-3">
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 font-semibold">
             Fornecedor GSM Digital
           </span>
-          <p className="text-base font-bold text-white mt-0.5">
+          <p className="text-sm sm:text-base font-bold text-white mt-0.5">
             {summary.supplierCount} produtos sincronizados
           </p>
-          <span className="text-[11px] text-neutral-500">
+          <span className="text-[10px] sm:text-[11px] text-neutral-500">
             Valor de atacado monitorado em tempo real
           </span>
         </div>
-        <div className="rounded-xl border border-emerald-500/25 bg-emerald-950/15 p-3">
-          <span className="text-[11px] uppercase tracking-wider text-emerald-400 font-semibold flex items-center gap-1">
-            <TrendingUp size={13} /> Sua Margem Média (Venda Loja)
+        <div className="rounded-xl border border-emerald-500/25 bg-emerald-950/15 p-2.5 sm:p-3">
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-emerald-400 font-semibold flex items-center gap-1">
+            <TrendingUp size={12} /> Margem Média
           </span>
-          <p className="text-base font-bold text-emerald-400 mt-0.5">
-            +{summary.avgMarginSale.toFixed(1)}% sobre o atacado
+          <p className="text-sm sm:text-base font-bold text-emerald-400 mt-0.5">
+            +{summary.avgMarginSale.toFixed(1)}%
           </p>
-          <span className="text-[11px] text-neutral-400">
-            Margem configurada para giro rápido
+          <span className="text-[10px] sm:text-[11px] text-neutral-400">
+            Sobre o atacado
           </span>
         </div>
-        <div className="rounded-xl border border-emerald-500/20 bg-neutral-950/90 p-3">
-          <span className="text-[11px] uppercase tracking-wider text-neutral-400 font-semibold">
-            Margem Média Líquida no PIX (5% OFF)
+        <div className="rounded-xl border border-emerald-500/20 bg-neutral-950/90 p-2.5 sm:p-3">
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 font-semibold">
+            Lucro no PIX
           </span>
-          <p className="text-base font-bold text-emerald-300 mt-0.5">
-            +{summary.avgMarginPix.toFixed(1)}% de lucro líquido
+          <p className="text-sm sm:text-base font-bold text-emerald-300 mt-0.5">
+            +{summary.avgMarginPix.toFixed(1)}%
           </p>
-          <span className="text-[11px] text-neutral-500">
-            Já descontando os 5% de incentivo do PIX
+          <span className="text-[10px] sm:text-[11px] text-neutral-500">
+            Margem líquida PIX
           </span>
         </div>
       </div>
@@ -400,14 +401,14 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
       </ul>
 
       {editing && (
-        <div className="fixed inset-0 z-40 bg-black/70 flex items-end sm:items-center justify-center">
+        <div className="fixed inset-0 z-40 bg-black/75 flex items-end sm:items-center justify-center">
           <form
             onSubmit={save}
-            className="w-full sm:max-w-2xl max-h-[94dvh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-neutral-950 border border-neutral-800 p-4 sm:p-6 space-y-4"
+            className="w-full sm:max-w-2xl max-h-[92dvh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-neutral-950 border border-neutral-800 p-3.5 sm:p-6 space-y-3.5 sm:space-y-4"
           >
             <div className="flex items-center justify-between">
-              <h3 className="font-bold">{isNew ? 'Novo produto' : 'Editar produto'}</h3>
-              <button type="button" onClick={() => setEditing(null)} className={btnGhost} aria-label="Fechar">
+              <h3 className="font-bold text-sm sm:text-base">{isNew ? 'Novo produto' : 'Editar produto'}</h3>
+              <button type="button" onClick={() => setEditing(null)} className={`${btnGhost} !p-2`} aria-label="Fechar">
                 <X size={16} />
               </button>
             </div>
@@ -421,101 +422,115 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
               />
             </Field>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Field label="Categoria">
-                <select
-                  value={editing.categoria}
-                  onChange={(e) => set('categoria', e.target.value as Product['categoria'])}
-                  className={inputCls}
-                >
-                  {CATS.map((c) => (
-                    <option key={c}>{c}</option>
-                  ))}
-                </select>
-              </Field>
-              <Field label="Selo">
-                <select
-                  value={editing.tag}
-                  onChange={(e) => set('tag', e.target.value as Product['tag'])}
-                  className={inputCls}
-                >
-                  {TAGS.map((t) => (
-                    <option key={t}>{t}</option>
-                  ))}
-                </select>
-              </Field>
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+              <div className="col-span-2 sm:col-span-1">
+                <Field label="Categoria">
+                  <select
+                    value={editing.categoria}
+                    onChange={(e) => set('categoria', e.target.value as Product['categoria'])}
+                    className={inputCls}
+                  >
+                    {CATS.map((c) => (
+                      <option key={c}>{c}</option>
+                    ))}
+                  </select>
+                </Field>
+              </div>
+              <div className="col-span-2 sm:col-span-1">
+                <Field label="Selo">
+                  <select
+                    value={editing.tag}
+                    onChange={(e) => set('tag', e.target.value as Product['tag'])}
+                    className={inputCls}
+                  >
+                    {TAGS.map((t) => (
+                      <option key={t}>{t}</option>
+                    ))}
+                  </select>
+                </Field>
+              </div>
 
-              <Field
-                label="Valor de Atacado / Custo Fornecedor (R$)"
-                hint="Preço pago no fornecedor (GSM Digital)."
-              >
-                <div className="flex gap-2">
+              <div className="col-span-2 sm:col-span-1">
+                <Field
+                  label="Custo Fornecedor / Atacado (R$)"
+                  hint="Preço pago no fornecedor."
+                >
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      inputMode="decimal"
+                      value={editing.precoCusto ?? 0}
+                      onChange={(e) => set('precoCusto', e.target.value as unknown as number)}
+                      className={inputCls}
+                    />
+                    <button
+                      type="button"
+                      onClick={applyAutoMarginToEditing}
+                      className={`${btnGhost} shrink-0 !px-3`}
+                      title="Calcular preço de venda automaticamente com a margem de giro"
+                    >
+                      <Sparkles size={14} className="text-emerald-400" /> Giro
+                    </button>
+                  </div>
+                </Field>
+              </div>
+
+              <div className="col-span-1">
+                <Field label="Preço Venda / PIX (R$)">
+                  <input
+                    required
+                    type="number"
+                    step="0.01"
+                    min="0.01"
+                    inputMode="decimal"
+                    value={editing.precoPor}
+                    onChange={(e) => set('precoPor', e.target.value as unknown as number)}
+                    className={inputCls}
+                  />
+                </Field>
+              </div>
+
+              <div className="col-span-1">
+                <Field label="Preço De / Âncora (R$)">
                   <input
                     type="number"
                     step="0.01"
                     min="0"
                     inputMode="decimal"
-                    value={editing.precoCusto ?? 0}
-                    onChange={(e) => set('precoCusto', e.target.value as unknown as number)}
+                    value={editing.precoDe}
+                    onChange={(e) => set('precoDe', e.target.value as unknown as number)}
                     className={inputCls}
                   />
-                  <button
-                    type="button"
-                    onClick={applyAutoMarginToEditing}
-                    className={btnGhost}
-                    title="Calcular preço de venda automaticamente com a margem de giro"
-                  >
-                    <Sparkles size={14} className="text-emerald-400" /> Giro
-                  </button>
-                </div>
-              </Field>
+                </Field>
+              </div>
 
-              <Field label="Preço de Venda Loja (R$)" hint="O preço no Pix (5% off) é calculado sozinho.">
-                <input
-                  required
-                  type="number"
-                  step="0.01"
-                  min="0.01"
-                  inputMode="decimal"
-                  value={editing.precoPor}
-                  onChange={(e) => set('precoPor', e.target.value as unknown as number)}
-                  className={inputCls}
-                />
-              </Field>
-
-              <Field label="Preço De / Âncora riscado (R$)">
-                <input
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  inputMode="decimal"
-                  value={editing.precoDe}
-                  onChange={(e) => set('precoDe', e.target.value as unknown as number)}
-                  className={inputCls}
-                />
-              </Field>
-
-              <Field label="Parcelas sem juros">
-                <input
-                  type="number"
-                  min="1"
-                  max="12"
-                  inputMode="numeric"
-                  value={editing.maxParcelasSemJuros}
-                  onChange={(e) => set('maxParcelasSemJuros', e.target.value as unknown as number)}
-                  className={inputCls}
-                />
-              </Field>
-              <Field label="Estoque">
-                <input
-                  type="number"
-                  min="0"
-                  inputMode="numeric"
-                  value={editing.estoque}
-                  onChange={(e) => set('estoque', e.target.value as unknown as number)}
-                  className={inputCls}
-                />
-              </Field>
+              <div className="col-span-1">
+                <Field label="Máx. Parcelas Cartão">
+                  <input
+                    type="number"
+                    min="1"
+                    max="12"
+                    inputMode="numeric"
+                    value={editing.maxParcelasSemJuros}
+                    onChange={(e) => set('maxParcelasSemJuros', e.target.value as unknown as number)}
+                    className={inputCls}
+                  />
+                </Field>
+              </div>
+              <div className="col-span-1">
+                <Field label="Estoque">
+                  <input
+                    type="number"
+                    min="0"
+                    inputMode="numeric"
+                    value={editing.estoque}
+                    onChange={(e) => set('estoque', e.target.value as unknown as number)}
+                    className={inputCls}
+                  />
+                </Field>
+              </div>
             </div>
 
             {/* Simulador de Lucro em Tempo Real */}
@@ -526,27 +541,26 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
                 calculatePixPrice(Number(editing.precoPor) || 0)
               );
               return (
-                <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-3.5 space-y-1.5">
-                  <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">
-                    Resumo da Sua Margem de Lucro neste Produto
+                <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-2.5 sm:p-3.5 space-y-1.5">
+                  <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-emerald-400">
+                    Resumo da Sua Margem neste Produto
                   </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
                     <div className="bg-neutral-950/80 rounded-lg p-2 border border-neutral-800">
-                      <span className="text-neutral-400 block">Custo Atacado</span>
-                      <strong className="text-sm text-white">{formatBRL(m.cost)}</strong>
+                      <span className="text-neutral-400 block truncate">Custo</span>
+                      <strong className="text-xs sm:text-sm text-white">{formatBRL(m.cost)}</strong>
                     </div>
                     <div className="bg-neutral-950/80 rounded-lg p-2 border border-emerald-500/30">
-                      <span className="text-neutral-400 block">Lucro Venda Normal ({formatBRL(m.sale)})</span>
-                      <strong className="text-sm text-emerald-400">
-                        +{formatBRL(m.profitSale)} ({m.profitPctSale >= 0 ? '+' : ''}
-                        {m.profitPctSale.toFixed(1)}%)
+                      <span className="text-neutral-400 block truncate">Lucro ({formatBRL(m.sale)})</span>
+                      <strong className="text-xs sm:text-sm text-emerald-400">
+                        +{formatBRL(m.profitSale)}
                       </strong>
                     </div>
                     <div className="bg-neutral-950/80 rounded-lg p-2 border border-neutral-800">
-                      <span className="text-neutral-400 block">Lucro no PIX ({formatBRL(m.pix)})</span>
-                      <strong className="text-sm text-emerald-300">
-                        +{formatBRL(m.profitPix)} ({m.profitPctPix >= 0 ? '+' : ''}
-                        {m.profitPctPix.toFixed(1)}%)
+                      <span className="text-neutral-400 block truncate">Margem %</span>
+                      <strong className="text-xs sm:text-sm text-emerald-300">
+                        {m.profitPctSale >= 0 ? '+' : ''}
+                        {m.profitPctSale.toFixed(1)}%
                       </strong>
                     </div>
                   </div>
