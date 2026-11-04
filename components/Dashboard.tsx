@@ -3,12 +3,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { User } from 'firebase/auth';
 import {
+  ArrowLeftRight,
   ExternalLink,
   Image as ImageIcon,
   LogOut,
   Package,
   Receipt,
   RefreshCw,
+  Sparkles,
   Truck,
 } from 'lucide-react';
 import { DFRegion, HeroBanner, Product } from '../types/store';
@@ -19,13 +21,17 @@ import ProductsPanel from './ProductsPanel';
 import BannersPanel from './BannersPanel';
 import ShippingPanel from './ShippingPanel';
 import OrdersPanel from './OrdersPanel';
+import TradeInAdminPanel from './TradeInAdminPanel';
+import StoriesAdminPanel from './StoriesAdminPanel';
 import { btnGhost } from './ui';
 
-type Tab = 'produtos' | 'banners' | 'fretes' | 'pedidos';
+type Tab = 'produtos' | 'banners' | 'troca' | 'stories' | 'fretes' | 'pedidos';
 
 const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
   { id: 'produtos', label: 'Produtos', icon: <Package size={16} /> },
   { id: 'banners', label: 'Banners', icon: <ImageIcon size={16} /> },
+  { id: 'troca', label: 'Troca Fácil', icon: <ArrowLeftRight size={16} /> },
+  { id: 'stories', label: 'Stories', icon: <Sparkles size={16} /> },
   { id: 'fretes', label: 'Fretes', icon: <Truck size={16} /> },
   { id: 'pedidos', label: 'Pedidos', icon: <Receipt size={16} /> },
 ];
@@ -147,12 +153,12 @@ export default function Dashboard({ user, onLogout }: { user: User; onLogout: ()
             </button>
           </div>
         </div>
-        <nav className="max-w-6xl mx-auto px-3 sm:px-6 grid grid-cols-4 sm:flex gap-1 pb-2">
+        <nav className="max-w-6xl mx-auto px-3 sm:px-6 flex overflow-x-auto no-scrollbar sm:flex-wrap gap-1.5 pb-2">
           {TABS.map((t) => (
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`flex items-center justify-center sm:justify-start gap-1.5 whitespace-nowrap rounded-lg px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium transition ${
+              className={`flex items-center justify-center sm:justify-start gap-1.5 whitespace-nowrap rounded-lg px-2.5 sm:px-3 py-2 text-xs sm:text-sm font-medium transition shrink-0 ${
                 tab === t.id
                   ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
                   : 'text-neutral-400 border border-transparent hover:text-white'
@@ -185,6 +191,8 @@ export default function Dashboard({ user, onLogout }: { user: User; onLogout: ()
             publish={publishBanners}
           />
         )}
+        {tab === 'troca' && <TradeInAdminPanel onNotify={notify} />}
+        {tab === 'stories' && <StoriesAdminPanel onNotify={notify} />}
         {tab === 'fretes' && (
           <ShippingPanel regions={regions} isPublished={published.regions} publish={publishRegions} />
         )}
