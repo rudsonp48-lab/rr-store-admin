@@ -22,16 +22,14 @@ import BannersPanel from './BannersPanel';
 import ShippingPanel from './ShippingPanel';
 import OrdersPanel from './OrdersPanel';
 import TradeInAdminPanel from './TradeInAdminPanel';
-import StoriesAdminPanel from './StoriesAdminPanel';
 import { btnGhost } from './ui';
 
-type Tab = 'produtos' | 'banners' | 'troca' | 'stories' | 'fretes' | 'pedidos';
+type Tab = 'produtos' | 'banners' | 'troca' | 'fretes' | 'pedidos';
 
 const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
   { id: 'produtos', label: 'Produtos', icon: <Package size={16} /> },
   { id: 'banners', label: 'Banners', icon: <ImageIcon size={16} /> },
   { id: 'troca', label: 'Troca Fácil', icon: <ArrowLeftRight size={16} /> },
-  { id: 'stories', label: 'Stories', icon: <Sparkles size={16} /> },
   { id: 'fretes', label: 'Fretes', icon: <Truck size={16} /> },
   { id: 'pedidos', label: 'Pedidos', icon: <Receipt size={16} /> },
 ];
@@ -192,7 +190,6 @@ export default function Dashboard({ user, onLogout }: { user: User; onLogout: ()
           />
         )}
         {tab === 'troca' && <TradeInAdminPanel onNotify={notify} />}
-        {tab === 'stories' && <StoriesAdminPanel onNotify={notify} />}
         {tab === 'fretes' && (
           <ShippingPanel regions={regions} isPublished={published.regions} publish={publishRegions} />
         )}
