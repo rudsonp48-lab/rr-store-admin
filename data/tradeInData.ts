@@ -1,4 +1,4 @@
-import { formatBRL, WHATSAPP_NUMBER } from './mockData';
+import { formatBRL, WHATSAPP_NUMBER } from './defaults';
 import { Product } from '../types/store';
 
 export type TradeInBrand = 'Apple' | 'Samsung' | 'Xiaomi';
