@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { RefreshCw, Save, Sparkles, Check, Smartphone, ArrowRight, ShieldCheck } from 'lucide-react';
-import { TRADE_IN_MODELS, TradeInModel } from '../../rr-store/data/tradeInData';
+import { TRADE_IN_MODELS, TradeInModel } from '../data/tradeInData';
 import { formatBRL } from '../data/defaults';
 import { btnPrimary, btnGhost, Field, inputCls } from './ui';
 

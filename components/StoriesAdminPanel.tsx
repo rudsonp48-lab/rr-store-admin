@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Sparkles, Save, Eye, Film, Image as ImageIcon, CheckCircle2 } from 'lucide-react';
-import { STORE_STORIES, StoryGroup } from '../../rr-store/data/storiesData';
+import { STORE_STORIES, StoryGroup } from '../data/storiesData';
 import { btnPrimary, btnGhost, Field, inputCls } from './ui';
 
 interface Props {
