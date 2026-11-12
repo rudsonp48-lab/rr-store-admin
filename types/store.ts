@@ -33,6 +33,7 @@ export interface Product {
   avaliacoesCount: number;
   tag: 'Mais Vendido' | 'Entrega Hoje DF' | 'Novidade' | 'Oferta Flash' | 'Favorito no DF' | 'Estoque Limitado';
   imagem: string;
+  gallery?: string[];
   descricao: string;
   estoque: number;
 }

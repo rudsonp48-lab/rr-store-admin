@@ -39,37 +39,37 @@ Verifique até o final
 
 📱 iPhone 18  Duo 256gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
 
-🤍Silver: 14.500
-🖤Preto: 14.500
+🤍Silver: 14.599
+🖤Preto: 14.599
 
 📱 iPhone 18  Duo 512gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
 
-🤍Silver: 15.500
+🤍Silver: 15.599
 
 
 📱 iPhone 17  pro max 512 (americano 🇺🇸)💯 prazo, no pix sem fiado 
 
-🤍Silver: 8.750
+🤍Silver: 8.850
 
 📱 iPhone 18 pro 256gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
 
-🩷 Bordo: 7.750
+🩷 Bordo: 7.899
 
 
 📱 iPhone 18  pro max 256gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
 
-💜 Bordô: 9.000
-💙 Azul: 9.000
-🖤 Preto:8.899
+💜 Bordô: 9.099
+💙 Azul: 9.099
+🖤 Preto:8.950
 🤍 Silver:8.700
 
 📱 iPhone 18 pro 512gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
 
-🩷 Bordo: 9.600
+🩷 Bordo: 9.700
 
 📱 iPhone 18  pro  Max 512gb (americano 🇺🇸)💯 prazo, no pix sem fiado 
 
-🩷 Bordo: 10.850
+🩷 Bordo: 10.900
 
 ⌚️Apple watch S11 42 mm
 
@@ -112,18 +112,18 @@ Verifique até o final
 💎 MacBook Neo 8gb  256gb T13
 
 
-💙Azul: 5.199
+💙Azul: 5.299
 
 💎 MacBook Neo 8gb  512gb T13
 
-🤍Silver: 5.850
-🩷Rosa:5.900
+🤍Silver: 5.950
+🩷Rosa: 6.099
 
 💎 MacBook Air M5 16gb  512gb T13
 
-🖤 Midinight: 8.150
-💙Sky Blue: 8.150
-🤍Silver: 8.150
+🖤 Midinight: 8.200
+💙Sky Blue: 8.200
+🤍Silver: 8.200
 
 ——————————————
 
@@ -133,7 +133,7 @@ Verifique até o final
 
 💎 Magic Keyboard 11” Ipad pro M5
 
-🖤 Space gray: 2650
+🖤 Space gray: 2750
 
 💎 Magic Keyboard 13” Ipad pro M5
         zerou no estoque 
@@ -144,24 +144,24 @@ Verifique até o final
 
 💎 iPad Pro M5 T13  256gb WIFI
 
-🖤Preto: 8.850
-🤍Branco: 8.850
+🖤Preto: 8.950
+🤍Branco: 8.900
 
 💎 iPad Pro M5 T11  256gb 
 
-⚫ space black: 7.850
+⚫ space black: 7.900
 
 💎 iPad Pro M5 T11  512gb 
 
-⚫ space black: 8.750
+⚫ space black: 8.850
 
 💎 iPad Air M4 T11 128gb
 
-💙Azul: 4.850
+💙Azul: 4.900
 
 💎 iPad Air M4 T13 128gb
 
-🩶 Space Gray: 6.099
+🩶 Space Gray: 6.150
 
 💎 iPad Air M4 T13 256gb
 
@@ -169,7 +169,7 @@ Verifique até o final
 
 💎 iPad 11 128gb sem menos 
 
-💙Azul: 2.850
+💙Azul: 2.900
 🤍Silver: 2.900
 🩷Rosa: 2.900
 
@@ -386,12 +386,60 @@ export default function ApplePriceUpdaterModal({
       return;
     }
 
+    const getSiblingGroupKey = (id: string): string | null => {
+      const prefixes = [
+        'rr-apple-ip18duo-256-',
+        'rr-apple-ip18duo-512-',
+        'rr-apple-ip18pro-256-',
+        'rr-apple-ip18pro-512-',
+        'rr-apple-ip18pm-256-',
+        'rr-apple-ip18pm-512-',
+        'rr-apple-ip17pm-256-',
+        'rr-apple-ip17pm-512-',
+        'rr-apple-ip17pro-256-',
+        'rr-apple-watch-s11-42-',
+        'rr-apple-watch-s12-42-',
+        'rr-apple-watch-s12-46-',
+        'rr-apple-watch-ultra3-49-',
+        'rr-apple-macbook-air-m5-512-',
+        'rr-apple-ipadair-m4-11-128-',
+        'rr-apple-ipadair-m4-13-128-',
+        'rr-apple-airpods-max2-',
+      ];
+      return prefixes.find((pref) => id.startsWith(pref)) || null;
+    };
+
+    const siblingGroupFallbackPrice = new Map<string, number>();
+    for (const it of selectedMatched) {
+      if (!it.matchedProductId || it.isZerou || !(it.price > 0)) continue;
+      const gKey = getSiblingGroupKey(it.matchedProductId);
+      if (gKey && !siblingGroupFallbackPrice.has(gKey)) {
+        siblingGroupFallbackPrice.set(gKey, it.price);
+      }
+    }
+
     setIsPublishing(true);
     try {
-      // 1. Atualiza produtos existentes no catálogo
+      // 1. Atualiza produtos existentes no catálogo (e sincroniza cores irmãs da mesma capacidade que não vieram na lista)
       const updatedCatalog = products.map((prod) => {
         const itemUpdate = selectedMatched.find((it) => it.matchedProductId === prod.id);
-        if (!itemUpdate) return prod;
+        if (!itemUpdate) {
+          const gKey = getSiblingGroupKey(prod.id);
+          const siblingPrice = gKey ? siblingGroupFallbackPrice.get(gKey) : undefined;
+          if (siblingPrice && siblingPrice > 0) {
+            const parcelas = siblingPrice >= 200 ? 12 : siblingPrice >= 80 ? 6 : 3;
+            return {
+              ...prod,
+              precoCusto: siblingPrice,
+              precoDe: Math.round(siblingPrice * 1.15),
+              precoPor: siblingPrice,
+              precoPix: siblingPrice,
+              maxParcelasSemJuros: parcelas,
+              parcelamento: formatInstallment(siblingPrice, parcelas),
+            };
+          }
+          return prod;
+        }
 
         if (itemUpdate.isZerou && zeroOutStock) {
           return {

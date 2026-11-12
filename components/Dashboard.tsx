@@ -14,9 +14,17 @@ import {
   Truck,
 } from 'lucide-react';
 import { DFRegion, HeroBanner, Product } from '../types/store';
-import { DF_REGIONS, PRODUCTS } from '../data/defaults';
+import { DF_REGIONS, formatInstallment, PRODUCTS } from '../data/defaults';
 import { SITE_URL } from '../lib/firebase';
-import { friendlyError, loadSettings, saveBanners, saveCatalog, saveShipping } from '../lib/data';
+import {
+  CURRENT_PRICE_CATALOG_VERSION,
+  friendlyError,
+  loadSettings,
+  saveBanners,
+  saveCatalog,
+  saveShipping,
+} from '../lib/data';
+import { resolveAppleImage } from '../lib/apple-price-parser';
 import ProductsPanel from './ProductsPanel';
 import BannersPanel from './BannersPanel';
 import ShippingPanel from './ShippingPanel';
@@ -56,23 +64,71 @@ export default function Dashboard({ user, onLogout }: { user: User; onLogout: ()
       const s = await loadSettings();
       if (s.products) {
         const localMap = new Map(PRODUCTS.map((p) => [p.id, p]));
-        const cloudIds = new Set(s.products.map((p) => p.id));
-        const sanitizedCloud = s.products.map((cp) => {
+        const sousaImgs = new Set(PRODUCTS.filter((p) => p.id.startsWith('sousa-')).map((p) => p.imagem));
+        const seen = new Set<string>();
+        const uniqueCloud = s.products.filter((cp) => {
+          if (!cp?.id || cp.id === 'rr-apple-airtag-2pack') return false;
+          if (seen.has(cp.id)) return false;
+          seen.add(cp.id);
+          return true;
+        });
+        const sanitizedCloud = uniqueCloud.map((cp) => {
           const local = localMap.get(cp.id);
-          if (local && (cp.id.startsWith('rr-apple-') || cp.id.startsWith('sousa-'))) {
+          const hasCurrentPriceVersion =
+            (cp as Product & { priceCatalogVersion?: number }).priceCatalogVersion ===
+            CURRENT_PRICE_CATALOG_VERSION;
+          const isApple = cp.id.startsWith('rr-apple-');
+          const useLocalOfficialPrice = isApple && !!local && !hasCurrentPriceVersion;
+
+          const livePrice = useLocalOfficialPrice
+            ? local!.precoPor
+            : cp.precoPor > 0
+            ? cp.precoPor
+            : local?.precoPor || local?.precoPix || 0;
+          const livePix = useLocalOfficialPrice
+            ? local!.precoPix
+            : cp.precoPix > 0
+            ? cp.precoPix
+            : livePrice;
+          const liveDe = useLocalOfficialPrice
+            ? local!.precoDe
+            : cp.precoDe > livePrice
+            ? cp.precoDe
+            : Math.round(livePrice * 1.15);
+          const parcelas = livePrice >= 200 ? 12 : livePrice >= 80 ? 6 : 3;
+
+          if (local && (isApple || cp.id.startsWith('sousa-'))) {
             return {
+              ...local,
               ...cp,
               nome: local.nome,
               imagem: local.imagem,
               descricao: local.descricao,
+              precoDe: liveDe,
+              precoPor: livePrice,
+              precoPix: livePix,
+              maxParcelasSemJuros: parcelas,
+              parcelamento: formatInstallment(livePrice, parcelas),
+              estoque: useLocalOfficialPrice
+                ? local.estoque
+                : typeof cp.estoque === 'number'
+                ? cp.estoque
+                : local.estoque,
+            };
+          }
+          if (isApple && sousaImgs.has(cp.imagem)) {
+            return {
+              ...cp,
+              imagem: resolveAppleImage(cp.nome, ''),
             };
           }
           return cp;
         });
-        const merged = [
-          ...PRODUCTS.filter((p) => !cloudIds.has(p.id)),
-          ...sanitizedCloud,
-        ];
+        const cloudById = new Map<string, Product>(sanitizedCloud.map((p) => [p.id, p]));
+        const localIds = new Set<string>(PRODUCTS.map((p) => p.id));
+        const canonicalMerged = PRODUCTS.map((p) => cloudById.get(p.id) || p);
+        const newCloudOnly = sanitizedCloud.filter((p) => !localIds.has(p.id));
+        const merged = [...newCloudOnly, ...canonicalMerged];
         const apple = merged.filter((p) => p.id.startsWith('rr-apple-'));
         const others = merged.filter((p) => !p.id.startsWith('rr-apple-'));
         setProducts([...apple, ...others]);

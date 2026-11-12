@@ -14,12 +14,18 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { auth, db, storage } from './firebase';
 import { DFRegion, HeroBanner, Product } from '../types/store';
 import { OrderRecord } from '../types/admin';
+import FASTSHOP_GALLERY_JSON from '../data/fastshop_gallery.json';
+
+const FASTSHOP_GALLERY = FASTSHOP_GALLERY_JSON as Record<string, string[]>;
 
 export interface Settings {
   products: Product[] | null;
   regions: DFRegion[] | null;
   banners: HeroBanner[] | null;
 }
+
+export const CURRENT_PRICE_CATALOG_VERSION = 15;
+const ADMIN_CACHE_KEY = 'rr_store_settings_cache_v15';
 
 /** Lê catálogo, fretes e banners publicados (null = ainda não publicado). */
 export async function loadSettings(): Promise<Settings> {
@@ -35,7 +41,7 @@ export async function loadSettings(): Promise<Settings> {
   } catch (err) {
     console.warn('Erro ao carregar do Firestore, tentando cache local:', err);
     try {
-      const cached = localStorage.getItem('rr_store_settings_cache_v10');
+      const cached = localStorage.getItem(ADMIN_CACHE_KEY);
       if (cached) {
         const parsed = JSON.parse(cached);
         if (Array.isArray(parsed.products)) result.products = parsed.products;
@@ -57,11 +63,17 @@ export async function saveCatalog(products: Product[]): Promise<void> {
     }
   }
 
+  const stampedProducts = products.map((p) => ({
+    ...p,
+    gallery: p.gallery || FASTSHOP_GALLERY[p.id],
+    priceCatalogVersion: CURRENT_PRICE_CATALOG_VERSION,
+  }));
+
   // Sempre armazena em cache local para resposta instantânea
   try {
     localStorage.setItem(
-      'rr_store_settings_cache_v10',
-      JSON.stringify({ products, updatedAtIso: new Date().toISOString() })
+      ADMIN_CACHE_KEY,
+      JSON.stringify({ products: stampedProducts, updatedAtIso: new Date().toISOString() })
     );
   } catch {
     // ignore
@@ -69,8 +81,9 @@ export async function saveCatalog(products: Product[]): Promise<void> {
 
   try {
     await setDoc(doc(db, 'rr_store_settings', 'catalog'), {
-      products,
-      totalCount: products.length,
+      products: stampedProducts,
+      priceCatalogVersion: CURRENT_PRICE_CATALOG_VERSION,
+      totalCount: stampedProducts.length,
       updatedAtIso: new Date().toISOString(),
       updatedAt: serverTimestamp(),
     });
