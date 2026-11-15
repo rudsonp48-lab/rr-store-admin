@@ -112,6 +112,7 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
   const [syncingSupplier, setSyncingSupplier] = useState(false);
+  const [syncingSouza, setSyncingSouza] = useState(false);
   const [appleModalOpen, setAppleModalOpen] = useState(false);
 
   const enrichedProducts = useMemo(
@@ -159,13 +160,17 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
     setIsNew(false);
   };
 
-  const syncSupplierNow = async () => {
-    setSyncingSupplier(true);
+  const syncFromEndpoint = async (
+    endpoint: string,
+    supplierLabel: string,
+    setLoading: (v: boolean) => void
+  ) => {
+    setLoading(true);
     try {
-      const res = await fetch('/api/supplier-sync');
+      const res = await fetch(endpoint);
       const data = await res.json();
       if (!res.ok || !Array.isArray(data.products)) {
-        throw new Error(data.error || 'Falha ao sincronizar fornecedor');
+        throw new Error(data.error || `Falha ao sincronizar ${supplierLabel}`);
       }
       const supplierMap = new Map<string, Product>(
         data.products.map((p: Product) => [p.id, p])
@@ -190,14 +195,20 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
       const merged = [...newItems, ...updated];
       await publish(
         merged,
-        `Sincronizado com GSM Digital (${data.products.length} produtos verificados, ${newItems.length} novos).`
+        `Sincronizado com ${supplierLabel} (${data.products.length} produtos verificados, ${newItems.length} novos).`
       );
     } catch (e) {
-      alert(`Erro ao sincronizar com GSM Digital: ${(e as Error).message}`);
+      alert(`Erro ao sincronizar com ${supplierLabel}: ${(e as Error).message}`);
     } finally {
-      setSyncingSupplier(false);
+      setLoading(false);
     }
   };
+
+  const syncSupplierNow = () =>
+    syncFromEndpoint('/api/supplier-sync', 'GSM Digital', setSyncingSupplier);
+
+  const syncSouzaNow = () =>
+    syncFromEndpoint('/api/sousa-sync', 'Souza Eletrônicos', setSyncingSouza);
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -278,12 +289,21 @@ export default function ProductsPanel({ products, isPublished, publish }: Props)
           </button>
           <button
             onClick={syncSupplierNow}
-            disabled={syncingSupplier}
+            disabled={syncingSupplier || syncingSouza}
             className={`${btnGhost} !px-2.5 !py-2 text-xs sm:text-sm`}
             title="Buscar novos produtos, preços de atacado e estoque direto de gsmdigitalacessorios.com.br"
           >
             <RefreshCw size={15} className={syncingSupplier ? 'animate-spin text-emerald-400 shrink-0' : 'text-emerald-400 shrink-0'} />
             <span className="truncate">{syncingSupplier ? 'Sincronizando…' : 'Sincronizar GSM'}</span>
+          </button>
+          <button
+            onClick={syncSouzaNow}
+            disabled={syncingSouza || syncingSupplier}
+            className={`${btnGhost} !px-2.5 !py-2 text-xs sm:text-sm`}
+            title="Sincronizar produtos de sousagamestecnologia.kyte.site/pt-BR (Souza Eletrônicos)"
+          >
+            <RefreshCw size={15} className={syncingSouza ? 'animate-spin text-sky-400 shrink-0' : 'text-sky-400 shrink-0'} />
+            <span className="truncate">{syncingSouza ? 'Sincronizando…' : 'Sincronizar Souza'}</span>
           </button>
           <button onClick={restoreDefaults} className={`${btnGhost} !px-2.5 !py-2 text-xs sm:text-sm`}>
             <RotateCcw size={15} className="shrink-0" />
