@@ -58,7 +58,9 @@ function stripUndefined<T>(value: T): T {
     return value;
   }
   if (Array.isArray(value)) {
-    return value.map((item) => stripUndefined(item)) as unknown as T;
+    return value
+      .filter((item) => item !== undefined)
+      .map((item) => stripUndefined(item)) as unknown as T;
   }
   if (typeof value === 'object' && !(value instanceof Date)) {
     const res: Record<string, any> = {};
@@ -107,13 +109,14 @@ export async function saveCatalog(products: Product[]): Promise<void> {
   }
 
   try {
-    const payload = stripUndefined({
-      products: stampedProducts,
+    const cleanProducts = stripUndefined(stampedProducts);
+    const payload = {
+      products: cleanProducts,
       priceCatalogVersion: CURRENT_PRICE_CATALOG_VERSION,
-      totalCount: stampedProducts.length,
+      totalCount: cleanProducts.length,
       updatedAtIso: new Date().toISOString(),
       updatedAt: serverTimestamp(),
-    });
+    };
     await setDoc(doc(db, 'rr_store_settings', 'catalog'), payload);
   } catch (err) {
     console.warn('Falha ao gravar no Firestore, catálogo salvo no cache do painel:', err);
