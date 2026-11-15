@@ -53,6 +53,25 @@ export async function loadSettings(): Promise<Settings> {
   return result;
 }
 
+function stripUndefined<T>(value: T): T {
+  if (value === null || value === undefined) {
+    return value;
+  }
+  if (Array.isArray(value)) {
+    return value.map((item) => stripUndefined(item)) as unknown as T;
+  }
+  if (typeof value === 'object' && !(value instanceof Date)) {
+    const res: Record<string, any> = {};
+    for (const [k, v] of Object.entries(value)) {
+      if (v !== undefined) {
+        res[k] = stripUndefined(v);
+      }
+    }
+    return res as T;
+  }
+  return value;
+}
+
 export async function saveCatalog(products: Product[]): Promise<void> {
   // Garante autenticação para contornar qualquer regra de permissão
   if (!auth.currentUser) {
@@ -63,11 +82,19 @@ export async function saveCatalog(products: Product[]): Promise<void> {
     }
   }
 
-  const stampedProducts = products.map((p) => ({
-    ...p,
-    gallery: p.gallery || FASTSHOP_GALLERY[p.id],
-    priceCatalogVersion: CURRENT_PRICE_CATALOG_VERSION,
-  }));
+  const stampedProducts = products.map((p) => {
+    const item: Record<string, any> = {
+      ...p,
+      priceCatalogVersion: CURRENT_PRICE_CATALOG_VERSION,
+    };
+    const gallery = p.gallery || FASTSHOP_GALLERY[p.id];
+    if (Array.isArray(gallery) && gallery.length > 0) {
+      item.gallery = gallery;
+    } else {
+      delete item.gallery;
+    }
+    return item as Product;
+  });
 
   // Sempre armazena em cache local para resposta instantânea
   try {
@@ -80,13 +107,14 @@ export async function saveCatalog(products: Product[]): Promise<void> {
   }
 
   try {
-    await setDoc(doc(db, 'rr_store_settings', 'catalog'), {
+    const payload = stripUndefined({
       products: stampedProducts,
       priceCatalogVersion: CURRENT_PRICE_CATALOG_VERSION,
       totalCount: stampedProducts.length,
       updatedAtIso: new Date().toISOString(),
       updatedAt: serverTimestamp(),
     });
+    await setDoc(doc(db, 'rr_store_settings', 'catalog'), payload);
   } catch (err) {
     console.warn('Falha ao gravar no Firestore, catálogo salvo no cache do painel:', err);
     const code = (err as { code?: string })?.code;
@@ -108,11 +136,12 @@ export async function saveShipping(regions: DFRegion[]): Promise<void> {
   }
 
   try {
-    await setDoc(doc(db, 'rr_store_settings', 'shipping'), {
+    const payload = stripUndefined({
       regions,
       updatedAtIso: new Date().toISOString(),
       updatedAt: serverTimestamp(),
     });
+    await setDoc(doc(db, 'rr_store_settings', 'shipping'), payload);
   } catch (err) {
     const code = (err as { code?: string })?.code;
     if (code === 'permission-denied') return;
@@ -130,11 +159,12 @@ export async function saveBanners(banners: HeroBanner[]): Promise<void> {
   }
 
   try {
-    await setDoc(doc(db, 'rr_store_settings', 'banners'), {
+    const payload = stripUndefined({
       banners,
       updatedAtIso: new Date().toISOString(),
       updatedAt: serverTimestamp(),
     });
+    await setDoc(doc(db, 'rr_store_settings', 'banners'), payload);
   } catch (err) {
     const code = (err as { code?: string })?.code;
     if (code === 'permission-denied') return;
