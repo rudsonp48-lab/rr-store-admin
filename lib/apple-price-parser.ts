@@ -532,22 +532,40 @@ const APPLE_STUDIO_IMAGES: Record<string, string> = {
 export function resolveAppleImage(header: string, color: string): string {
   const norm = normalizeStr(`${header} ${color}`);
 
-  if (norm.includes('duo')) {
-    if (norm.includes('preto') || norm.includes('black')) {
-      return APPLE_STUDIO_IMAGES['iphone-18-duo-preto'];
-    }
-    return APPLE_STUDIO_IMAGES['iphone-18-duo-silver'];
+  // 1. Acessórios e Periféricos primeiro (evita colisão ex: "Magic Keyboard 11 iPad Pro")
+  if (norm.includes('trackpad')) {
+    return APPLE_STUDIO_IMAGES['magic-trackpad'];
   }
-  if (norm.includes('18promax') || norm.includes('18pro') || norm.includes('18')) {
-    if (norm.includes('bordo')) return APPLE_STUDIO_IMAGES['iphone-18-promax-bordo'];
-    if (norm.includes('azul')) return APPLE_STUDIO_IMAGES['iphone-18-promax-azul'];
-    if (norm.includes('preto')) return APPLE_STUDIO_IMAGES['iphone-18-promax-preto'];
-    if (norm.includes('silver')) return APPLE_STUDIO_IMAGES['iphone-18-promax-silver'];
+  if (norm.includes('teclado') || norm.includes('keyboard')) {
+    return APPLE_STUDIO_IMAGES['teclado-touchid'];
   }
-  if (norm.includes('17promax') || norm.includes('17')) {
-    if (norm.includes('laranja')) return APPLE_STUDIO_IMAGES['iphone-17-promax-laranja'];
-    return APPLE_STUDIO_IMAGES['iphone-17-promax-silver'];
+  if (norm.includes('mouse')) {
+    if (norm.includes('preto')) return APPLE_STUDIO_IMAGES['magic-mouse-preto'];
+    return APPLE_STUDIO_IMAGES['magic-mouse-branco'];
   }
+  if (norm.includes('pencil')) {
+    return APPLE_STUDIO_IMAGES['apple-pencil-pro'];
+  }
+  if (norm.includes('airtag')) {
+    return APPLE_STUDIO_IMAGES['airtag-2'];
+  }
+  if (norm.includes('airpods')) {
+    if (norm.includes('max')) return APPLE_STUDIO_IMAGES['airpods-max-2-roxo'];
+    if (norm.includes('pro')) return APPLE_STUDIO_IMAGES['airpods-pro-3'];
+    if (norm.includes('5')) return APPLE_STUDIO_IMAGES['airpods-5'];
+    return APPLE_STUDIO_IMAGES['airpods-4'];
+  }
+  if (norm.includes('magsafe')) {
+    return APPLE_STUDIO_IMAGES['magsafe-charger'];
+  }
+  if (norm.includes('fonte')) {
+    return APPLE_STUDIO_IMAGES['fonte-apple'];
+  }
+  if (norm.includes('cabo')) {
+    return APPLE_STUDIO_IMAGES['cabo-apple'];
+  }
+
+  // 2. Watch, MacBook e iPad antes de iPhone (evita colisão ex: "A17PRO" bater em "17")
   if (norm.includes('watch')) {
     if (norm.includes('ultra')) return APPLE_STUDIO_IMAGES['watch-ultra3-black'];
     if (norm.includes('rosegold')) return APPLE_STUDIO_IMAGES['watch-s12-rosegold'];
@@ -571,36 +589,23 @@ export function resolveAppleImage(header: string, color: string): string {
     if (norm.includes('branco') || norm.includes('silver')) return APPLE_STUDIO_IMAGES['ipad-pro-m5-branco'];
     return APPLE_STUDIO_IMAGES['ipad-pro-m5-preto'];
   }
-  if (norm.includes('airpods')) {
-    if (norm.includes('max')) return APPLE_STUDIO_IMAGES['airpods-max-2-roxo'];
-    if (norm.includes('pro')) return APPLE_STUDIO_IMAGES['airpods-pro-3'];
-    if (norm.includes('5')) return APPLE_STUDIO_IMAGES['airpods-5'];
-    return APPLE_STUDIO_IMAGES['airpods-4'];
+
+  // 3. iPhones (exige 'iphone' ou 'duo')
+  if (norm.includes('duo')) {
+    if (norm.includes('preto') || norm.includes('black')) {
+      return APPLE_STUDIO_IMAGES['iphone-18-duo-preto'];
+    }
+    return APPLE_STUDIO_IMAGES['iphone-18-duo-silver'];
   }
-  if (norm.includes('airtag')) {
-    return APPLE_STUDIO_IMAGES['airtag-2'];
+  if (norm.includes('iphone') && (norm.includes('18promax') || norm.includes('18pro') || norm.includes('18'))) {
+    if (norm.includes('bordo')) return APPLE_STUDIO_IMAGES['iphone-18-promax-bordo'];
+    if (norm.includes('azul')) return APPLE_STUDIO_IMAGES['iphone-18-promax-azul'];
+    if (norm.includes('preto')) return APPLE_STUDIO_IMAGES['iphone-18-promax-preto'];
+    if (norm.includes('silver')) return APPLE_STUDIO_IMAGES['iphone-18-promax-silver'];
   }
-  if (norm.includes('trackpad')) {
-    return APPLE_STUDIO_IMAGES['magic-trackpad'];
-  }
-  if (norm.includes('teclado') || norm.includes('keyboard')) {
-    return APPLE_STUDIO_IMAGES['teclado-touchid'];
-  }
-  if (norm.includes('mouse')) {
-    if (norm.includes('preto')) return APPLE_STUDIO_IMAGES['magic-mouse-preto'];
-    return APPLE_STUDIO_IMAGES['magic-mouse-branco'];
-  }
-  if (norm.includes('pencil')) {
-    return APPLE_STUDIO_IMAGES['apple-pencil-pro'];
-  }
-  if (norm.includes('fonte')) {
-    return APPLE_STUDIO_IMAGES['fonte-apple'];
-  }
-  if (norm.includes('cabo')) {
-    return APPLE_STUDIO_IMAGES['cabo-apple'];
-  }
-  if (norm.includes('magsafe')) {
-    return APPLE_STUDIO_IMAGES['magsafe-charger'];
+  if (norm.includes('iphone') && (norm.includes('17promax') || norm.includes('17'))) {
+    if (norm.includes('laranja')) return APPLE_STUDIO_IMAGES['iphone-17-promax-laranja'];
+    return APPLE_STUDIO_IMAGES['iphone-17-promax-silver'];
   }
 
   return 'https://fastshopbr.vtexassets.com/arquivos/ids/5582702/17892121899730.jpg?v=639248107988200000';
